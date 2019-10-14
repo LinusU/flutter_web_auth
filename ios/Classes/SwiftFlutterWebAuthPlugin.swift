@@ -20,7 +20,13 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 keepMe = nil
 
                 if let err = err {
-                    if #available(iOS 12, *) {
+                    if #available(iOS 13, *) {
+                        if case SFAuthenticationError.Code.canceledLogin = err {
+                            result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
+                            return
+                        }
+                    }
+                    else if #available(iOS 12, *) {
                         if case ASWebAuthenticationSessionError.Code.canceledLogin = err {
                             result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
                             return
@@ -39,7 +45,12 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 result(url!.absoluteString)
             }
 
-            if #available(iOS 12, *) {
+            if #available(iOS 13, *) {
+                let session = SFAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
+                session.start()
+                keepMe = session
+            }
+            else if #available(iOS 12, *) {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
                 session.start()
                 keepMe = session
