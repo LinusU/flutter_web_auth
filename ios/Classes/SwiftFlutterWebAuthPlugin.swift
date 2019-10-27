@@ -41,6 +41,16 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
 
             if #available(iOS 12, *) {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
+
+                if #available(iOS 13, *) {
+                    guard let provider = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController else {
+                        result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
+                        return
+                    }
+
+                    session.presentationContextProvider = provider
+                }
+
                 session.start()
                 keepMe = session
             } else {
@@ -51,5 +61,12 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
         } else {
             result(FlutterMethodNotImplemented)
         }
+    }
+}
+
+@available(iOS 13, *)
+extension FlutterViewController: ASWebAuthenticationPresentationContextProviding {
+    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
