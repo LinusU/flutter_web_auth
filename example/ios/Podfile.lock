@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_web_auth/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  flutter_web_auth: aa9a07a42db8495ad696e7595343ddc536787abc
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_web_auth: 7d4a2911f847b2e93590e2223c370e26fca3e1fd
 
 PODFILE CHECKSUM: 58760ca3c5878cb71ae11bd6eeff33fd4ce06e4f
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
