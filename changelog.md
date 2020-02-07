@@ -1,3 +1,7 @@
+## 0.1.3
+
+- 🎉 Update the kotlin plugin version to 1.3.61
+
 ## 0.1.2
 
 - 🎉 Add support for iOS 13
