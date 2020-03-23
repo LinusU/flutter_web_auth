@@ -1,3 +1,7 @@
+## 0.1.4
+
+- 🎉 Add support for MacOS
+
 ## 0.1.3
 
 - 🎉 Update the kotlin plugin version to 1.3.61
