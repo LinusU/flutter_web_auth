@@ -17,13 +17,14 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
 
             var keepMe: Any? = nil
             let completionHandler = { (url: URL?, err: Error?) in
-                 keepMe = nil
+                keepMe = nil
 
                 if let err = err {
                     if case ASWebAuthenticationSessionError.canceledLogin = err {
                         result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
                         return
                     }
+
                     result(FlutterError(code: "EUNKNOWN", message: err.localizedDescription, details: nil))
                     return
                 }
