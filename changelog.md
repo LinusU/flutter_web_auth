@@ -1,3 +1,11 @@
+## 0.2.0
+
+- 💥 Add macOS support ([#20](https://github.com/LinusU/flutter_web_auth/pull/20))
+
+  Migration guide:
+
+  This version drops support for Flutter 1.9 and older, please upgrade to Flutter 1.12 for continued support.
+
 ## 0.1.3
 
 - 🎉 Update the kotlin plugin version to 1.3.61
