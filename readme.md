@@ -2,7 +2,7 @@
 
 A Flutter plugin for authenticating a user with a web service, even if the web service is run by a third party. Most commonly used with OAuth2, but can be used with any web flow that can redirect to a custom scheme.
 
-In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenticationSession] on iOS 12 and newer, [`SFAuthenticationSession`][SFAuthenticationSession] on iOS 11, and [Chrome Custom Tabs][Chrome Custom Tabs] on Android.
+In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenticationSession] on iOS 12+ and macOS 10.15+, [`SFAuthenticationSession`][SFAuthenticationSession] on iOS 11, and [Chrome Custom Tabs][Chrome Custom Tabs] on Android.
 
 [ASWebAuthenticationSession]: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession
 [SFAuthenticationSession]: https://developer.apple.com/documentation/safariservices/sfauthenticationsession
@@ -11,6 +11,10 @@ In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenti
 | **iOS**                | **Android**                    |
 | ---------------------- | ------------------------------ |
 | ![iOS](screen-ios.gif) | ![Android](screen-android.gif) |
+
+| **macOS**                  |
+| -------------------------- |
+| ![macOS](screen-macos.gif) |
 
 ## Usage
 

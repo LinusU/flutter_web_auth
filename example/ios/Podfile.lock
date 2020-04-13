@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_web_auth (0.1.2):
+  - flutter_web_auth (0.1.3):
     - Flutter
 
 DEPENDENCIES:
@@ -15,8 +15,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_web_auth: aa639d59f7a7b099f3e824f33fbd01ca23b86ea5
+  flutter_web_auth: 852e01fc7fdac9bd99315745ebb9196b84cb8811
 
 PODFILE CHECKSUM: 58760ca3c5878cb71ae11bd6eeff33fd4ce06e4f
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1
