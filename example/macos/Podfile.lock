@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/flutter/darwin-x64
 
 SPEC CHECKSUMS:
-  flutter_web_auth: 34e87842a14fe24a89309865841aed211174b81f
+  flutter_web_auth: ef70cda7897ae8d627194e9291f9d2888007dda9
   FlutterMacOS: 15bea8a44d2fa024068daa0140371c020b4b6ff9
 
 PODFILE CHECKSUM: 882fce9150893cd66c23bbd28a572b3439b8ac6d
