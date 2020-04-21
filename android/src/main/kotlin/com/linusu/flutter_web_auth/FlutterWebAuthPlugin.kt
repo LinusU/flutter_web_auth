@@ -40,8 +40,8 @@ class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
           intent.launchUrl(context, url)
         }
         "cleanUpDanglingCalls" -> {
-          callbacks.forEach{ (_, resultCallback) ->
-            resultCallback.error("CANCELED", "User canceled login", null)
+          callbacks.forEach{ (_, danglingResultCallback) ->
+              danglingResultCallback.error("CANCELED", "User canceled login", null)
           }
           callbacks.clear()
           resultCallback.success(null)
