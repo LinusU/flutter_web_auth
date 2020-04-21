@@ -1,7 +1,5 @@
 package com.linusu.flutter_web_auth
 
-import java.util.HashMap
-
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -16,7 +14,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 
 class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
   companion object {
-    public val callbacks = HashMap<String, Result>()
+    val callbacks = mutableMapOf<String, Result>()
 
     @JvmStatic
     fun registerWith(registrar: Registrar) {
@@ -25,22 +23,30 @@ class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
     }
   }
 
-  override fun onMethodCall(call: MethodCall, result: Result) {
-    if (call.method == "authenticate") {
-      val url = Uri.parse(call.argument<String>("url"))
-      val callbackUrlScheme = call.argument<String>("callbackUrlScheme")!!
+  override fun onMethodCall(call: MethodCall, resultCallback: Result) {
+    when (call.method) {
+        "authenticate" -> {
+          val url = Uri.parse(call.argument("url"))
+          val callbackUrlScheme = call.argument<String>("callbackUrlScheme")!!
 
-      callbacks.put(callbackUrlScheme, result)
+          callbacks[callbackUrlScheme] = resultCallback
 
-      val intent = CustomTabsIntent.Builder().build()
-      val keepAliveIntent = Intent().setClassName(context.getPackageName(), KeepAliveService::class.java.canonicalName)
+          val intent = CustomTabsIntent.Builder().build()
+          val keepAliveIntent = Intent(context, KeepAliveService::class.java)
 
-      intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_TASK)
-      intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
+          intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_TASK)
+          intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
 
-      intent.launchUrl(context, url)
-    } else {
-      result.notImplemented()
+          intent.launchUrl(context, url)
+        }
+        "cleanUpDanglingCalls" -> {
+          callbacks.forEach{ (_, resultCallback) ->
+            resultCallback.error("CANCELED", "User canceled login", null)
+          }
+          callbacks.clear()
+          resultCallback.success(null)
+        }
+        else -> resultCallback.notImplemented()
     }
   }
 }
