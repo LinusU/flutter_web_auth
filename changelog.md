@@ -1,3 +1,7 @@
+## 0.2.1
+
+- 🐛 Fix AndroidX build issues ([#27](https://github.com/LinusU/flutter_web_auth/pull/27))
+
 ## 0.2.0
 
 - 💥 Add macOS support ([#20](https://github.com/LinusU/flutter_web_auth/pull/20))
