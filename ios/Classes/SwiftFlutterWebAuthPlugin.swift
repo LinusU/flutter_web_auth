@@ -21,12 +21,12 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
 
                 if let err = err {
                     if #available(iOS 12, *) {
-                        if case ASWebAuthenticationSessionError.Code.canceledLogin = err {
+                        if case ASWebAuthenticationSessionError.canceledLogin = err {
                             result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
                             return
                         }
                     } else {
-                        if case SFAuthenticationError.Code.canceledLogin = err {
+                        if case SFAuthenticationError.canceledLogin = err {
                             result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
                             return
                         }
