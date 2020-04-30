@@ -35,7 +35,7 @@ class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
       val intent = CustomTabsIntent.Builder().build()
       val keepAliveIntent = Intent().setClassName(context.getPackageName(), KeepAliveService::class.java.canonicalName)
 
-      intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_TASK)
+      intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
       intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
 
       intent.launchUrl(context, url)
