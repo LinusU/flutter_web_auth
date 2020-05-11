@@ -53,10 +53,12 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
 
                 session.start()
                 sessionToKeepAlive = session
-            } else {
+            } else if #available(iOS 11, *) {
                 let session = SFAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
                 session.start()
                 sessionToKeepAlive = session
+            } else {
+                result(FlutterError(code: "FAILED", message: "This plugin does currently not support iOS lower than iOS 11" , details: nil))
             }
         } else if (call.method == "cleanUpDanglingCalls") {
             // we do not keep track of old callbacks on iOS, so nothing to do here
