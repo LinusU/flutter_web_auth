@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:io' show HttpServer;
 
@@ -93,9 +94,12 @@ class _MyAppState extends State<MyApp> {
     final url = 'http://localtest.me:43823/';
     final callbackUrlScheme = 'foobar';
 
-    final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: callbackUrlScheme);
-
-    setState(() { _status = 'Got result: $result'; });
+    try {
+      final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: callbackUrlScheme);
+      setState(() { _status = 'Got result: $result'; });
+    } on PlatformException catch (e) {
+      setState(() { _status = 'Got error: $e'; });
+    }
   }
 
   @override
