@@ -15,18 +15,18 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
             let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
 
-            var keepMe: Any? = nil
+            var sessionToKeepAlive: Any? = nil // if we do not keep the session alive, it will get closed immediately while showing the dialog
             let completionHandler = { (url: URL?, err: Error?) in
-                keepMe = nil
+                sessionToKeepAlive = nil
 
                 if let err = err {
                     if #available(iOS 12, *) {
-                        if case ASWebAuthenticationSessionError.Code.canceledLogin = err {
+                        if case ASWebAuthenticationSessionError.canceledLogin = err {
                             result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
                             return
                         }
                     } else {
-                        if case SFAuthenticationError.Code.canceledLogin = err {
+                        if case SFAuthenticationError.canceledLogin = err {
                             result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
                             return
                         }
@@ -52,12 +52,17 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 }
 
                 session.start()
-                keepMe = session
-            } else {
+                sessionToKeepAlive = session
+            } else if #available(iOS 11, *) {
                 let session = SFAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
                 session.start()
-                keepMe = session
+                sessionToKeepAlive = session
+            } else {
+                result(FlutterError(code: "FAILED", message: "This plugin does currently not support iOS lower than iOS 11" , details: nil))
             }
+        } else if (call.method == "cleanUpDanglingCalls") {
+            // we do not keep track of old callbacks on iOS, so nothing to do here
+            result(nil)
         } else {
             result(FlutterMethodNotImplemented)
         }

@@ -1,3 +1,7 @@
+## 0.2.2
+
+- 🐛 Fix propagation of "CANCELED" error on iOS ([#31](https://github.com/LinusU/flutter_web_auth/pull/31))
+
 ## 0.2.1
 
 - 🐛 Fix AndroidX build issues ([#27](https://github.com/LinusU/flutter_web_auth/pull/27))
