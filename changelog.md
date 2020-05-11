@@ -1,3 +1,9 @@
+## 0.2.3
+
+- 🐛 Remove NoHistory flag ([#33](https://github.com/LinusU/flutter_web_auth/pull/33))
+- 🐛 Fix building on iOS 8, 9, and 10 ([#29](https://github.com/LinusU/flutter_web_auth/pull/29))
+- 🐛 Always terminate 'authenticate' callbacks on Android ([#28](https://github.com/LinusU/flutter_web_auth/pull/28))
+
 ## 0.2.2
 
 - 🐛 Fix propagation of "CANCELED" error on iOS ([#31](https://github.com/LinusU/flutter_web_auth/pull/31))
