@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_web_auth'
-  s.version          = '0.2.3'
+  s.version          = '0.2.4'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
