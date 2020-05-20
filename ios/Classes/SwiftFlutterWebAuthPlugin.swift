@@ -49,8 +49,8 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                         result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
                         return
                     }
-                    session.prefersEphemeralWebBrowserSession = preferEphemeralSession;
-                    session.presentationContextProvider = provider;
+                    session.prefersEphemeralWebBrowserSession = preferEphemeralSession
+                    session.presentationContextProvider = provider
                 }
 
                 session.start()
