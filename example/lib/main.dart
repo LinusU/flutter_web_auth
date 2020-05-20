@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
       final result = await FlutterWebAuth.authenticate(
           url: url,
           callbackUrlScheme: callbackUrlScheme,
-          preferEphemeralSession: true);
+          preferEphemeralSession: false);
       setState(() {
         _status = 'Got result: $result';
       });
