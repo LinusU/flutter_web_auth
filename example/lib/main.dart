@@ -82,7 +82,9 @@ class _MyAppState extends State<MyApp> {
     final server = await HttpServer.bind('127.0.0.1', 43823);
 
     server.listen((req) async {
-      setState(() { _status = 'Received request!'; });
+      setState(() {
+        _status = 'Received request!';
+      });
 
       req.response.headers.add('Content-Type', 'text/html');
       req.response.write(html);
@@ -95,10 +97,17 @@ class _MyAppState extends State<MyApp> {
     final callbackUrlScheme = 'foobar';
 
     try {
-      final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: callbackUrlScheme);
-      setState(() { _status = 'Got result: $result'; });
+      final result = await FlutterWebAuth.authenticate(
+          url: url,
+          callbackUrlScheme: callbackUrlScheme,
+          preferEphemeralSession: true);
+      setState(() {
+        _status = 'Got result: $result';
+      });
     } on PlatformException catch (e) {
-      setState(() { _status = 'Got error: $e'; });
+      setState(() {
+        _status = 'Got error: $e';
+      });
     }
   }
 
@@ -117,7 +126,9 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(height: 80),
               RaisedButton(
                 child: Text('Authenticate'),
-                onPressed: () { this.authenticate(); },
+                onPressed: () {
+                  this.authenticate();
+                },
               ),
             ],
           ),

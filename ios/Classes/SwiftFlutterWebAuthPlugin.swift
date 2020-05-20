@@ -14,7 +14,7 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
         if call.method == "authenticate" {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
             let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
-
+            let preferEphemeralSession = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeralSession"] as! Bool;
             var sessionToKeepAlive: Any? = nil // if we do not keep the session alive, it will get closed immediately while showing the dialog
             let completionHandler = { (url: URL?, err: Error?) in
                 sessionToKeepAlive = nil
@@ -49,8 +49,8 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                         result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
                         return
                     }
-
-                    session.presentationContextProvider = provider
+                    session.prefersEphemeralWebBrowserSession = preferEphemeralSession;
+                    session.presentationContextProvider = provider;
                 }
 
                 session.start()
