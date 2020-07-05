@@ -26,15 +26,21 @@ class FlutterWebAuth {
 
   /// Ask the user to authenticate to the specified web service.
   ///
-  /// The page pointed to by [url] will be loaded and displayed to the user. From the page, the user can authenticate herself and grant access to the app. On completion, the service will send a callback URL with an authentication token, and this URL will be result of the returned [Future].
+  /// The page pointed to by [url] will be loaded and displayed to the user. 
+  /// From the page, the user can authenticate herself and grant access to the app. 
+  /// On completion, the service will send a callback URL with an authentication token, 
+  /// and this URL will be result of the returned [Future].
   ///
-  /// [callbackUrlScheme] should be a string specifying the scheme of the url that the page will redirect to upon successful authentication.
-  static Future<String> authenticate({@required String url, @required String callbackUrlScheme}) async {
+  /// [callbackUrlScheme] a string specifying the scheme of the url that the page will redirect to upon successful authentication.
+  /// [showBrowserChooser] a boolean to always show a browser chooser to the user when he has multiple browser installed,
+  /// can be usefull if some browser restriction rules are set by the authentication service).
+  static Future<String> authenticate({@required String url, @required String callbackUrlScheme, bool showBrowserChooser = false}) async {
     WidgetsBinding.instance.removeObserver(_resumedObserver); // safety measure so we never add this observer twice
     WidgetsBinding.instance.addObserver(_resumedObserver);
     return await _channel.invokeMethod('authenticate', <String, dynamic>{
       'url': url,
       'callbackUrlScheme': callbackUrlScheme,
+      'showBrowserChooser': showBrowserChooser,
     }) as String;
   }
 

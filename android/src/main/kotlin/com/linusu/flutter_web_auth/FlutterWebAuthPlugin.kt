@@ -28,16 +28,27 @@ class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
         "authenticate" -> {
           val url = Uri.parse(call.argument("url"))
           val callbackUrlScheme = call.argument<String>("callbackUrlScheme")!!
+          val showBrowserChooser = call.argument<Boolean>("showBrowserChooser")!!
 
           callbacks[callbackUrlScheme] = resultCallback
 
-          val intent = CustomTabsIntent.Builder().build()
           val keepAliveIntent = Intent(context, KeepAliveService::class.java)
 
-          intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-          intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
-
-          intent.launchUrl(context, url)
+          if (showBrowserChooser) {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = url
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
+            // Create intent to show the chooser dialog
+            val chooser = Intent.createChooser(intent, "")
+            context.startActivity(chooser)
+          } else {
+            val intent = CustomTabsIntent.Builder().build()
+            intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
+            intent.launchUrl(context, url)
+          }
+          
         }
         "cleanUpDanglingCalls" -> {
           callbacks.forEach{ (_, danglingResultCallback) ->
