@@ -92,3 +92,21 @@ In order to capture the callback url, the following `activity` needs to be added
   </application>
 </manifest>
 ```
+
+### iOS & macOS
+
+In order to capture the callback url, the following `CFBundleURLTypes` needs to be added to your `Info.plist`. Be sure to relpace `YOUR_CALLBACK_URL_IDENTIFIER_HERE` and `YOUR_CALLBACK_URL_SCHEME_HERE` with your actual callback url scheme.
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLName</key>
+        <string>YOUR_CALLBACK_URL_IDENTIFIER_HERE</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>YOUR_CALLBACK_URL_SCHEME_HERE</string>
+        </array>
+    </dict>
+</array>
+```
