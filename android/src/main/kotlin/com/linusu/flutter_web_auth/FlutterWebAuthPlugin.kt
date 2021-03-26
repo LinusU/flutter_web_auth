@@ -12,14 +12,26 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
-class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
+class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler, FlutterPlugin {
   companion object {
     val callbacks = mutableMapOf<String, Result>()
 
+    @override
+    fun onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    }
+
+    @override
+    fun onDetachedFromFlutterEngine(binding: FlutterPluginBinding?) {
+    }
+
     @JvmStatic
     fun registerWith(registrar: Registrar) {
-      val channel = MethodChannel(registrar.messenger(), "flutter_web_auth")
-      channel.setMethodCallHandler(FlutterWebAuthPlugin(registrar.activity() ?: registrar.context()))
+        init(registrar)
+    }
+
+    fun init(registrar: Registrar) {
+        val channel = MethodChannel(registrar.messenger(), "flutter_web_auth")
+        channel.setMethodCallHandler(FlutterWebAuthPlugin(registrar.activity() ?: registrar.context()))
     }
   }
 
