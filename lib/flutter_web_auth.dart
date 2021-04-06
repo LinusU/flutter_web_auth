@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart' show required;
 import 'package:flutter/services.dart' show MethodChannel;
 
 class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
@@ -29,9 +28,9 @@ class FlutterWebAuth {
   /// The page pointed to by [url] will be loaded and displayed to the user. From the page, the user can authenticate herself and grant access to the app. On completion, the service will send a callback URL with an authentication token, and this URL will be result of the returned [Future].
   ///
   /// [callbackUrlScheme] should be a string specifying the scheme of the url that the page will redirect to upon successful authentication.
-  static Future<String> authenticate({@required String url, @required String callbackUrlScheme}) async {
-    WidgetsBinding.instance.removeObserver(_resumedObserver); // safety measure so we never add this observer twice
-    WidgetsBinding.instance.addObserver(_resumedObserver);
+  static Future<String> authenticate({required String url, required String callbackUrlScheme}) async {
+    WidgetsBinding.instance?.removeObserver(_resumedObserver); // safety measure so we never add this observer twice
+    WidgetsBinding.instance?.addObserver(_resumedObserver);
     return await _channel.invokeMethod('authenticate', <String, dynamic>{
       'url': url,
       'callbackUrlScheme': callbackUrlScheme,
@@ -43,6 +42,6 @@ class FlutterWebAuth {
   /// terminate all `authenticate` calls with an error.
   static Future<void> _cleanUpDanglingCalls() async {
     await _channel.invokeMethod('cleanUpDanglingCalls');
-    WidgetsBinding.instance.removeObserver(_resumedObserver);
+    WidgetsBinding.instance?.removeObserver(_resumedObserver);
   }
 }
