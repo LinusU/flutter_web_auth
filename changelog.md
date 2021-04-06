@@ -1,3 +1,11 @@
+## 0.3.0
+
+- 💥 Add null safety support (#60)
+
+  Migration guide:
+
+  This version drops support for Flutter 1.x, please upgrade to Flutter 2 for continued support.
+
 ## 0.2.4
 
 - 🐛 Fix building on iOS ([#36](https://github.com/LinusU/flutter_web_auth/pull/36))

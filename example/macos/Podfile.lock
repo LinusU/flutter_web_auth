@@ -1,5 +1,5 @@
 PODS:
-  - flutter_web_auth (0.2.4):
+  - flutter_web_auth (0.3.0):
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
 
@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/flutter/darwin-x64
 
 SPEC CHECKSUMS:
-  flutter_web_auth: 2c46f02fe2fde0a2d852c9fe090fe499fcf91a58
+  flutter_web_auth: 9313580ed4eda5bfc281171cab902253aa1712da
   FlutterMacOS: 15bea8a44d2fa024068daa0140371c020b4b6ff9
 
 PODFILE CHECKSUM: 882fce9150893cd66c23bbd28a572b3439b8ac6d
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
