@@ -45,12 +45,21 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
 
                 if #available(iOS 13, *) {
-                    guard let provider = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController else {
-                        result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
+                    if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                        while let presentedViewController = topController.presentedViewController {
+                            topController = presentedViewController
+                        }
+                        if topController is UINavigationController {
+                            var viewControllerProvider = (topController as! UINavigationController).visibleViewController!
+                            session.presentationContextProvider = viewControllerProvider as! ASWebAuthenticationPresentationContextProviding
+                        } else {
+                            session.presentationContextProvider = topController as! ASWebAuthenticationPresentationContextProviding
+                        }
+                    } else {
+                        result(FlutterError(code: "FAILED", message: "Failed to aquire root view controller" , details: nil))
                         return
                     }
                     session.prefersEphemeralWebBrowserSession = preferEphemeralSession
-                    session.presentationContextProvider = provider
                 }
 
                 session.start()
