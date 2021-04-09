@@ -29,9 +29,9 @@ class FlutterWebAuth {
   ///
   /// [callbackUrlScheme] should be a string specifying the scheme of the url that the page will redirect to upon successful authentication.
   /// [preferEphemeralSession] iOS only - Prevents the web view from using shared cookie storage.
-  static Future<String> authenticate(
-      {required String url,
-      required String callbackUrlScheme,
+  static Future<String> authenticate({required String url, required String callbackUrlScheme}) async {
+    WidgetsBinding.instance?.removeObserver(_resumedObserver); // safety measure so we never add this observer twice
+    WidgetsBinding.instance?.addObserver(_resumedObserver);
       bool preferEphemeralSession = false,
       bool saveHistory = false}) async {
     WidgetsBinding.instance?.removeObserver(
