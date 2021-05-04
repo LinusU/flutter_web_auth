@@ -49,16 +49,17 @@ navigate(WebKitWebView *web_view,
 
 static GtkDialog*
 open_authorize_dialog(gpointer parent, FlMethodCall* method_call) {
-    auto popup = gtk_dialog_new_with_buttons("Authorize",
-                                             GTK_WINDOW(parent),
-                                             GTK_DIALOG_MODAL,
-                                             "_Cancel",
-                                             GTK_RESPONSE_CANCEL,
-                                             NULL);
+    auto dialog = gtk_dialog_new_with_buttons("Authorize",
+                                              GTK_WINDOW(parent),
+                                              GTK_DIALOG_MODAL,
+                                              "_Cancel",
+                                              GTK_RESPONSE_CANCEL,
+                                              NULL);
     auto args = fl_method_call_get_args(method_call);
     auto url = fl_value_get_string(fl_value_lookup_string(args, "url"));
 
-    auto content_area = gtk_dialog_get_content_area(GTK_DIALOG (popup));
+    // create a dialog with a webkit web view loading url inside
+    auto content_area = gtk_dialog_get_content_area(GTK_DIALOG (dialog));
     auto web_view = webkit_web_view_new();
     auto scrolled = gtk_scrolled_window_new(nullptr, nullptr);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled), GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
@@ -68,9 +69,9 @@ open_authorize_dialog(gpointer parent, FlMethodCall* method_call) {
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(web_view), url);
 
     g_signal_connect(web_view, "load-failed", G_CALLBACK(navigate), g_object_ref(method_call));
-    gtk_widget_show_all(popup);
+    gtk_widget_show_all(dialog);
 
-    return GTK_DIALOG(popup);
+    return GTK_DIALOG(dialog);
 }
 
 
