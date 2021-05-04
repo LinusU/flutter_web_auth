@@ -6,6 +6,7 @@ project(${PROJECT_NAME} LANGUAGES CXX)
 # not be changed
 set(PLUGIN_NAME "flutter_web_auth_plugin")
 
+pkg_check_modules(WEBKIT REQUIRED IMPORTED_TARGET webkit2gtk-4.0)
 add_library(${PLUGIN_NAME} SHARED
   "flutter_web_auth_plugin.cc"
 )
@@ -17,6 +18,7 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
   "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter)
 target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::GTK)
+target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::WEBKIT)
 
 # List of absolute paths to libraries that should be bundled with the plugin
 set(flutter_web_auth_bundled_libraries
