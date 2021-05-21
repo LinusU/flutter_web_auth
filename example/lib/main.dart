@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               Text('Status: $_status\n'),
               const SizedBox(height: 80),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Authenticate'),
                 onPressed: () { this.authenticate(); },
               ),
