@@ -13,7 +13,7 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if call.method == "authenticate" {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
-            let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
+            let callbackURLScheme = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String)?.scheme
 
             var keepMe: Any? = nil
             let completionHandler = { (url: URL?, err: Error?) in
