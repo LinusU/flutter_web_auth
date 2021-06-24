@@ -28,6 +28,7 @@ class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
         "authenticate" -> {
           val url = Uri.parse(call.argument("url"))
           val callbackUrlScheme = call.argument<String>("callbackUrlScheme")!!
+          val saveHistory = call.argument<Boolean>("saveHistory")
 
           callbacks[callbackUrlScheme] = resultCallback
 
@@ -35,6 +36,9 @@ class FlutterWebAuthPlugin(private val context: Context): MethodCallHandler {
           val keepAliveIntent = Intent(context, KeepAliveService::class.java)
 
           intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+          if (saveHistory != null && !saveHistory) {
+              intent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+          }
           intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
 
           intent.launchUrl(context, url)
