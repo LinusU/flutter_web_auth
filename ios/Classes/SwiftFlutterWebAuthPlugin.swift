@@ -14,6 +14,7 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
         if call.method == "authenticate" {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
             let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
+            let preferEphemeral = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeral"] as! Bool
 
             var sessionToKeepAlive: Any? = nil // if we do not keep the session alive, it will get closed immediately while showing the dialog
             let completionHandler = { (url: URL?, err: Error?) in
@@ -26,7 +27,7 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                             return
                         }
                     }
-                    
+
                     if #available(iOS 11, *) {
                         if case SFAuthenticationError.canceledLogin = err {
                             result(FlutterError(code: "CANCELED", message: "User canceled login", details: nil))
@@ -50,6 +51,7 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                         return
                     }
 
+                    session.prefersEphemeralWebBrowserSession = preferEphemeral
                     session.presentationContextProvider = provider
                 }
 
