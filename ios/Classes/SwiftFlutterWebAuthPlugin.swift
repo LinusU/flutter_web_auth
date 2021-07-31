@@ -13,7 +13,7 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if call.method == "authenticate" {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
-            let callbackURLScheme = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String)?.scheme
+            let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
 
             var sessionToKeepAlive: Any? = nil // if we do not keep the session alive, it will get closed immediately while showing the dialog
             let completionHandler = { (url: URL?, err: Error?) in
