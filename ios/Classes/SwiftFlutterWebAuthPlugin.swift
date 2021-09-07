@@ -62,7 +62,6 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                     }
 
                     session.prefersEphemeralWebBrowserSession = preferEphemeral
-                    session.presentationContextProvider = provider
                 }
 
                 session.start()
