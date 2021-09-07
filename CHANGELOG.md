@@ -1,3 +1,10 @@
+## 0.3.1
+
+- 🎉 Add support for Android Plugin API v2 (#67)
+- 🎉 Add support for ephemeral sessions (#64)
+- 🌹 Avoid deprecated RaisedButton in example (#75)
+- 🌹 Cleanup metadata
+
 ## 0.3.0
 
 - 💥 Add null safety support (#60)
