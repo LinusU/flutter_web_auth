@@ -50,14 +50,23 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                         while let presentedViewController = topController.presentedViewController {
                             topController = presentedViewController
                         }
-                        if topController is UINavigationController {
-                            var viewControllerProvider = (topController as! UINavigationController).visibleViewController!
-                            session.presentationContextProvider = viewControllerProvider as! ASWebAuthenticationPresentationContextProviding
+                        if let controller = topController as? UINavigationController {
+                            if let viewControllerProvider = controller.visibleViewController {
+                                guard let contextProvider = viewControllerProvider as? ASWebAuthenticationPresentationContextProviding else {
+                                    returnError(result: result)
+                                    return
+                                }
+                                session.presentationContextProvider = contextProvider
+                            }
                         } else {
-                            session.presentationContextProvider = topController as! ASWebAuthenticationPresentationContextProviding
+                            guard let contextProvider = topController as? ASWebAuthenticationPresentationContextProviding else {
+                                returnError(result: result)
+                                return
+                            }
+                            session.presentationContextProvider = contextProvider
                         }
                     } else {
-                        result(FlutterError(code: "FAILED", message: "Failed to aquire root view controller" , details: nil))
+                        returnError(result: result)
                         return
                     }
 
@@ -79,6 +88,10 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
         } else {
             result(FlutterMethodNotImplemented)
         }
+    }
+
+    private func returnError(result: @escaping FlutterResult) {
+        result(FlutterError(code: "FAILED", message: "Failed to aquire root view controller" , details: nil))
     }
 }
 
