@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void authenticate() async {
-    final url = 'http://127.0.0.1:43823/';
+    final url = 'http://localhost:43823/';
     final callbackUrlScheme = 'foobar';
 
     try {
