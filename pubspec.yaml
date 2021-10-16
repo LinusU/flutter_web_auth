@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +35,9 @@ flutter:
         pluginClass: FlutterWebAuthPlugin
       macos:
         pluginClass: FlutterWebAuthPlugin
+      web:
+        pluginClass: FlutterWebAuthPlugin
+        fileName: src/flutter_web_auth_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

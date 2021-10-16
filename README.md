@@ -2,7 +2,7 @@
 
 A Flutter plugin for authenticating a user with a web service, even if the web service is run by a third party. Most commonly used with OAuth2, but can be used with any web flow that can redirect to a custom scheme.
 
-In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenticationSession] on iOS 12+ and macOS 10.15+, [`SFAuthenticationSession`][SFAuthenticationSession] on iOS 11, and [Chrome Custom Tabs][Chrome Custom Tabs] on Android. You can build it with iOS 8+, but it is currently only supported by iOS 11 or higher.
+In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenticationSession] on iOS 12+ and macOS 10.15+, [`SFAuthenticationSession`][SFAuthenticationSession] on iOS 11, [Chrome Custom Tabs][Chrome Custom Tabs] on Android and opens a new window on Web. You can build it with iOS 8+, but it is currently only supported by iOS 11 or higher.
 
 [ASWebAuthenticationSession]: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession
 [SFAuthenticationSession]: https://developer.apple.com/documentation/safariservices/sfauthenticationsession
@@ -70,7 +70,7 @@ final accessToken = jsonDecode(response.body)['access_token'] as String;
 
 ## Setup
 
-Setup works as for any Flutter plugin, expect the Android caveat outlined below:
+Setup works as for any Flutter plugin, expect the Android and Web caveats outlined below:
 
 ### Android
 
@@ -92,3 +92,24 @@ In order to capture the callback url, the following `activity` needs to be added
   </application>
 </manifest>
 ```
+
+### Web
+
+On the Web platform an endpoint needs to be created that captures the callback URL and sends it to the application using the JavaScript `postMessage()` method. In the `./web` folder of the project, create an HTML file with the name e.g. `auth.html` with content:
+
+```html
+<!DOCTYPE html>
+<title>Authentication complete</title>
+<p>Authentication is complete. If this does not happen automatically, please
+close the window.
+<script>
+  window.opener.postMessage({
+    'flutter-web-auth': window.location.href
+  }, window.location.origin);
+  window.close();
+</script>
+```
+
+Redirection URL passed to the authentication service must be the same as the URL on which the application is running (schema, host, port if necessary) and the path must point to created HTML file, `/auth.html` in this case. The `callbackUrlScheme` parameter of the `authenticate()` method does not take into account, so it is possible to use a schema for native platforms in the code.
+
+For the Sign in with Apple in web_message response mode, postMessage from https://appleid.apple.com is also captured, and the authorization object is returned as a URL fragment encoded as a query string (for compatibility with other providers).
