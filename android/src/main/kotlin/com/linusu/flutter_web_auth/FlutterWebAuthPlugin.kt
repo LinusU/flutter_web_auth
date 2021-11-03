@@ -122,7 +122,6 @@ class FlutterWebAuthPlugin(
             val url = intent.data
             val scheme = url?.scheme
             callbacks.remove(scheme)?.success(url?.toString())
-            activity.finish()
             return true
         }
         return false
