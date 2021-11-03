@@ -81,20 +81,16 @@ extension UIApplication {
     
     /// Getting the VC in hierarchy by type.
     /// Supporting navigation, tab bar and presented controllers.
-    /// Not tested with different view hierarchies and iOS versions yet.
     func visibleViewController<Target: UIViewController>(_ target: Target.Type) -> Target? {
         let root = UIApplication.shared.windows.first?.rootViewController
         var visibleController: UIViewController?
-        if let targetRoot = root as? Target {
-            // Root is the target controller
-            visibleController = targetRoot
-        } else if let navigationRoot = root as? UINavigationController {
-            // Getting modal VC if exists. Otherwise the top view controller.
+        if let navigationRoot = root as? UINavigationController {
             visibleController = navigationRoot.topViewController
         } else if let tabRoot = root as? UITabBarController {
-            // Getting modal VC if exists.
-            // Otherwise the selectedViewController of tab bar controller.
             visibleController = tabRoot.selectedViewController
+        } else {
+            // Common UIViewController
+            visibleController = root
         }
         if let modalController = visibleController?.presentedViewController as? Target {
             return modalController
