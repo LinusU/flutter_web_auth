@@ -46,7 +46,7 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
 
                 if #available(iOS 13, *) {
-                    guard let provider = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController else {
+                    guard let provider = UIApplication.shared.visibleViewController(FlutterViewController.self) else {
                         result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
                         return
                     }
@@ -77,5 +77,34 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
 extension FlutterViewController: ASWebAuthenticationPresentationContextProviding {
     public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+extension UIApplication {
+    
+    /// Getting the VC in hierarchy by type.
+    /// Supporting navigation, tab bar and presented controllers.
+    /// Not tested with different view hierarchies and iOS versions yet.
+    func visibleViewController<Target: UIViewController>(_ target: Target.Type) -> Target? {
+        let root = UIApplication.shared.windows.first?.rootViewController
+        var visibleController: UIViewController?
+        if let targetRoot = root as? Target {
+            // Root is the target controller
+            visibleController = targetRoot
+        } else if let navigationRoot = root as? UINavigationController {
+            // Getting modal VC if exists. Otherwise the top view controller.
+            visibleController = navigationRoot.topViewController
+        } else if let tabRoot = root as? UITabBarController {
+            // Getting modal VC if exists.
+            // Otherwise the selectedViewController of tab bar controller.
+            visibleController = tabRoot.selectedViewController
+        }
+        if let modalController = visibleController?.presentedViewController as? Target {
+            return modalController
+        } else {
+            // If target not found as modal and the type cast below fails,
+            // the target controller is not presented in hierarchy.
+            return visibleController as? Target
+        }
     }
 }
