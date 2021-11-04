@@ -3,6 +3,8 @@ import SafariServices
 import Flutter
 import UIKit
 
+/// Conform your `AppDelegate` to the protocol
+/// in order to get `ASWebAuthenticationSession` work
 public protocol FlutterPresentationContextProviding: UIApplicationDelegate {
     var flutterController: FlutterViewController { get }
 }
@@ -51,6 +53,8 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
 
                 if #available(iOS 13, *) {
                     guard let appDelegate = UIApplication.shared.delegate as? FlutterPresentationContextProviding else {
+                        // Will receive nil if AppDelegate doesn't conform
+                        // to the `FlutterPresentationContextProviding` protocol
                         result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
                         return
                     }
