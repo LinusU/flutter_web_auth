@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
 
   flutter_web_auth_platform_interface: ^0.1.0
+  flutter_web_auth_windows: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,8 @@ flutter:
         pluginClass: FlutterWebAuthPlugin
       macos:
         pluginClass: FlutterWebAuthPlugin
+      windows:
+        default_package: flutter_web_auth_windows
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

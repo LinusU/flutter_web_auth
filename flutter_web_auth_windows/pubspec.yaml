@@ -1,0 +1,26 @@
+name: flutter_web_auth_windows
+description: Windows implementation of the flutter_web_auth plugin.
+version: 0.1.0
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+flutter:
+  plugin:
+    implements: flutter_web_auth
+    platforms:
+      windows:
+        dartPluginClass: FlutterWebAuthWindows
+        pluginClass: none
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  url_launcher: ^6.0.12
+
+  flutter_web_auth_platform_interface: ^0.1.0
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
