@@ -6,7 +6,7 @@ import UIKit
 /// Conform your `AppDelegate` to the protocol
 /// in order to get `ASWebAuthenticationSession` work
 public protocol FlutterPresentationContextProviding: UIApplicationDelegate {
-    var flutterController: FlutterViewController { get }
+    var flutterController: FlutterViewController? { get }
 }
 
 public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
