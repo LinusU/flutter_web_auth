@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_web_auth_platform_interface: ^0.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

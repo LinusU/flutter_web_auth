@@ -23,7 +23,7 @@ abstract class FlutterWebAuthPlatformInterface extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String> authenticate({required String url, required String callbackUrlScheme, bool preferEphemeral = false}) {
+  Future<String> authenticate({required String url, required String callbackUrlScheme, required bool preferEphemeral}) {
     throw UnimplementedError('authenticate() has not been implemented.');
   }
 

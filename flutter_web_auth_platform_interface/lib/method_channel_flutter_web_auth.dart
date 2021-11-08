@@ -7,7 +7,7 @@ const MethodChannel _kChannel = MethodChannel('flutter_web_auth');
 class MethodChannelFlutterWebAuth extends FlutterWebAuthPlatformInterface {
   @override
   Future<String> authenticate(
-      {required String url, required String callbackUrlScheme, bool preferEphemeral = false}) async {
+      {required String url, required String callbackUrlScheme, required bool preferEphemeral}) async {
     return await _kChannel.invokeMethod('authenticate', <String, dynamic>{
       'url': url,
       'callbackUrlScheme': callbackUrlScheme,
