@@ -141,6 +141,12 @@ private class ActivityLifecycleListener(
         }
     }
 
+    override fun onActivityStopped(activity: Activity) {}
+
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+
+    override fun onActivityDestroyed(activity: Activity) {}
+
     override fun onActivityResumed(activity: Activity) {
         verifyActivity(activity) {
             if (paused) {
@@ -157,13 +163,7 @@ private class ActivityLifecycleListener(
         }
     }
 
-    override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {}
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
 
     override fun onActivityStarted(activity: Activity) {}
-
-    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {}
-
-    override fun onActivityStopped(activity: Activity?) {}
-
-    override fun onActivityDestroyed(activity: Activity?) {}
 }
