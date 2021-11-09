@@ -39,6 +39,8 @@ const html = """
 """;
 
 class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
+  HttpServer? _server;
+
   /// Registers the Windows implementation.
   static void registerWith() {
     FlutterWebAuthPlatformInterface.instance = FlutterWebAuthWindows();
@@ -54,21 +56,24 @@ class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
       throw ArgumentError('Callback url scheme must start with http://localhost:{port}');
     }
 
-    final server = await HttpServer.bind('127.0.0.1', callbackUri.port);
+    await _server?.close(force: true);
+
+    _server = await HttpServer.bind('127.0.0.1', callbackUri.port);
     String? _result;
 
     launch(url);
 
-    await server.listen((req) async {
+    await _server!.listen((req) async {
       req.response.headers.add('Content-Type', 'text/html');
       req.response.write(html);
       req.response.close();
 
       _result = req.requestedUri.toString();
-      server.close();
+      _server?.close();
+      _server = null;
     }).asFuture();
 
-    server.close();
+    _server?.close(force: true);
 
     if (_result != null) {
       return _result!;
@@ -77,5 +82,7 @@ class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
   }
 
   @override
-  Future clearAllDanglingCalls() async {}
+  Future clearAllDanglingCalls() async {
+    await _server?.close(force: true);
+  }
 }
