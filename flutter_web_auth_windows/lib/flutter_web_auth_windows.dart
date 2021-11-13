@@ -1,8 +1,11 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth_platform_interface/flutter_web_auth_platform_interface.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:win32/win32.dart';
+import 'package:ffi/ffi.dart';
 
 const html = """
 <!DOCTYPE html>
@@ -76,6 +79,7 @@ class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
     _server?.close(force: true);
 
     if (_result != null) {
+      _bringWindowToFront();
       return _result!;
     }
     throw PlatformException(message: 'User canceled login', code: 'CANCELED');
@@ -84,5 +88,24 @@ class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
   @override
   Future clearAllDanglingCalls() async {
     await _server?.close(force: true);
+  }
+
+  void _bringWindowToFront() {
+    // https://stackoverflow.com/questions/916259/win32-bring-a-window-to-top/34414846#34414846
+
+    final lWindowName = 'FLUTTER_RUNNER_WIN32_WINDOW'.toNativeUtf16();
+    final m_hWnd = FindWindow(lWindowName, nullptr);
+    free(lWindowName);
+
+    final hCurWnd = GetForegroundWindow();
+    final dwMyID = GetCurrentThreadId();
+    final dwCurID = GetWindowThreadProcessId(hCurWnd, nullptr);
+    AttachThreadInput(dwCurID, dwMyID, TRUE);
+    SetWindowPos(m_hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
+    SetWindowPos(m_hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+    SetForegroundWindow(m_hWnd);
+    SetFocus(m_hWnd);
+    SetActiveWindow(m_hWnd);
+    AttachThreadInput(dwCurID, dwMyID, FALSE);
   }
 }
