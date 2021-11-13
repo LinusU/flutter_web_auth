@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
 
@@ -43,6 +44,7 @@ const html = """
 
 class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
   HttpServer? _server;
+  Timer? _authTimeout;
 
   /// Registers the Windows implementation.
   static void registerWith() {
@@ -64,6 +66,11 @@ class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
     _server = await HttpServer.bind('127.0.0.1', callbackUri.port);
     String? _result;
 
+    _authTimeout?.cancel();
+    _authTimeout = Timer(const Duration(seconds: 90), () {
+      _server?.close();
+    });
+
     launch(url);
 
     await _server!.listen((req) async {
@@ -77,6 +84,7 @@ class FlutterWebAuthWindows extends FlutterWebAuthPlatformInterface {
     }).asFuture();
 
     _server?.close(force: true);
+    _authTimeout?.cancel();
 
     if (_result != null) {
       _bringWindowToFront();
