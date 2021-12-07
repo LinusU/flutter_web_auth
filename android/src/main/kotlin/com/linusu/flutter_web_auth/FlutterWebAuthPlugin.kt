@@ -101,6 +101,7 @@ class FlutterWebAuthPlugin(
                     "android.support.customtabs.extra.KEEP_ALIVE",
                     keepAliveIntent
                 )
+                intent.intent.data = url
                 val CHROME_PACKAGE_NAME = "com.android.chrome"
                 val resolveInfoList = activity.packageManager.queryIntentActivities(intent
                         .intent, PackageManager.MATCH_ALL)
@@ -109,8 +110,6 @@ class FlutterWebAuthPlugin(
                     if (TextUtils.equals(packageName, CHROME_PACKAGE_NAME))
                         intent.intent.setPackage(CHROME_PACKAGE_NAME)
                 }
-
-                intent.intent.data = url
                 intent.launchUrl(activity, url)
             }
             else -> resultCallback.notImplemented()
