@@ -102,7 +102,8 @@ class FlutterWebAuthPlugin(
                     keepAliveIntent
                 )
                 val CHROME_PACKAGE_NAME = "com.android.chrome"
-                val resolveInfoList = activity.packageManager.queryIntentActivities(intent.intent, PackageManager.MATCH_DEFAULT_ONLY)
+                val resolveInfoList = activity.packageManager.queryIntentActivities(intent
+                        .intent, PackageManager.MATCH_ALL)
                 for (resolveInfo in resolveInfoList) {
                     val packageName = resolveInfo.activityInfo.packageName
                     if (TextUtils.equals(packageName, CHROME_PACKAGE_NAME))
