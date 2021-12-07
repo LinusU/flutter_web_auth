@@ -3,8 +3,10 @@ package com.linusu.flutter_web_auth
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
 import io.flutter.embedding.android.FlutterActivity
@@ -99,6 +101,14 @@ class FlutterWebAuthPlugin(
                     "android.support.customtabs.extra.KEEP_ALIVE",
                     keepAliveIntent
                 )
+                val CHROME_PACKAGE_NAME = "com.android.chrome"
+                val resolveInfoList = activity.packageManager.queryIntentActivities(intent.intent, PackageManager.MATCH_DEFAULT_ONLY)
+                for (resolveInfo in resolveInfoList) {
+                    val packageName = resolveInfo.activityInfo.packageName
+                    if (TextUtils.equals(packageName, CHROME_PACKAGE_NAME))
+                        intent.intent.setPackage(CHROME_PACKAGE_NAME)
+                }
+
                 intent.intent.data = url
                 intent.launchUrl(activity, url)
             }
