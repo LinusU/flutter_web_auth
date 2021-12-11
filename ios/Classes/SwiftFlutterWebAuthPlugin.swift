@@ -3,6 +3,12 @@ import SafariServices
 import Flutter
 import UIKit
 
+/// Conform your `AppDelegate` to the protocol
+/// in order to get `ASWebAuthenticationSession` work
+public protocol FlutterPresentationContextProviding: UIApplicationDelegate {
+    var flutterController: FlutterViewController? { get }
+}
+
 public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "flutter_web_auth", binaryMessenger: registrar.messenger())
@@ -46,11 +52,13 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
 
                 if #available(iOS 13, *) {
-                    guard let provider = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController else {
+                    guard let appDelegate = UIApplication.shared.delegate as? FlutterPresentationContextProviding else {
+                        // Will receive nil if AppDelegate doesn't conform
+                        // to the `FlutterPresentationContextProviding` protocol
                         result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
                         return
                     }
-
+                    let provider = appDelegate.flutterController
                     session.prefersEphemeralWebBrowserSession = preferEphemeral
                     session.presentationContextProvider = provider
                 }
@@ -64,9 +72,6 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
             } else {
                 result(FlutterError(code: "FAILED", message: "This plugin does currently not support iOS lower than iOS 11" , details: nil))
             }
-        } else if (call.method == "cleanUpDanglingCalls") {
-            // we do not keep track of old callbacks on iOS, so nothing to do here
-            result(nil)
         } else {
             result(FlutterMethodNotImplemented)
         }
