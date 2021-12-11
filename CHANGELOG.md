@@ -1,3 +1,7 @@
+## 0.3.2
+
+- 🎉 Add Web support (#77)
+
 ## 0.3.1
 
 - 🎉 Add support for Android Plugin API v2 (#67)
