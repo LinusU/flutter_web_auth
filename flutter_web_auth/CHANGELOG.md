@@ -1,3 +1,16 @@
+## 0.4.0
+
+- 💥 Upgrade to Android V2 embedding (#87)
+
+  Migration guide:
+
+  Make sure that you are running a recent version of Flutter before upgrading.
+
+
+## 0.3.2
+
+- 🎉 Add Web support (#77)
+
 ## 0.3.1
 
 - 🎉 Add support for Android Plugin API v2 (#67)

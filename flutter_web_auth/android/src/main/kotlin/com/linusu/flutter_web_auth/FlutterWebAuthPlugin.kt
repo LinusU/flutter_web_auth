@@ -59,7 +59,7 @@ class FlutterWebAuthPlugin(private var context: Context? = null, private var cha
           }
           intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
 
-          intent.launchUrl(context, url)
+          intent.launchUrl(context!!, url)
         }
         "cleanUpDanglingCalls" -> {
           callbacks.forEach{ (_, danglingResultCallback) ->
