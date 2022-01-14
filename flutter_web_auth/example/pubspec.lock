@@ -74,6 +74,13 @@ packages:
       relative: true
     source: path
     version: "0.4.0"
+  flutter_web_auth_platform_interface:
+    dependency: "direct overridden"
+    description:
+      path: "../../flutter_web_auth_platform_interface"
+      relative: true
+    source: path
+    version: "0.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -107,6 +114,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
