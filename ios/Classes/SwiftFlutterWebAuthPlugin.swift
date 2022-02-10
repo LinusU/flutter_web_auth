@@ -11,10 +11,13 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if call.method == "authenticate" {
-            let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
-            let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
-            let preferEphemeral = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeral"] as! Bool
+        if call.method == "authenticate",
+           let arguments = call.arguments as? Dictionary<String, AnyObject>,
+           let urlString = arguments["url"] as? String,
+           let url = URL(string: urlString),
+           let callbackURLScheme = arguments["callbackUrlScheme"] as? String,
+           let preferEphemeral = arguments["preferEphemeral"] as? Bool
+        {
 
             var sessionToKeepAlive: Any? = nil // if we do not keep the session alive, it will get closed immediately while showing the dialog
             let completionHandler = { (url: URL?, err: Error?) in
@@ -39,7 +42,12 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                     return
                 }
 
-                result(url!.absoluteString)
+                guard let url = url else {
+                    result(FlutterError(code: "EUNKNOWN", message: "URL was null, but no error provided.", details: nil))
+                    return
+                }
+
+                result(url.absoluteString)
             }
 
             if #available(iOS 12, *) {
@@ -54,22 +62,15 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                     while let presentedViewController = topController.presentedViewController {
                         topController = presentedViewController
                     }
-                    if let controller = topController as? UINavigationController {
-                        if let viewControllerProvider = controller.visibleViewController {
-                            guard let contextProvider = viewControllerProvider as? ASWebAuthenticationPresentationContextProviding else {
-                                result(FlutterError.aquireRootViewControllerFailed)
-                                return
-                            }
-                            session.presentationContextProvider = contextProvider
-                        }
-                    } else {
-                        guard let contextProvider = topController as? ASWebAuthenticationPresentationContextProviding else {
-                            result(FlutterError.aquireRootViewControllerFailed)
-                            return
-                        }
-                        session.presentationContextProvider = contextProvider
+                    if let nav = topController as? UINavigationController {
+                        topController = nav.visibleViewController ?? topController
                     }
 
+                    guard let contextProvider = topController as? ASWebAuthenticationPresentationContextProviding else {
+                        result(FlutterError.aquireRootViewControllerFailed)
+                        return
+                    }
+                    session.presentationContextProvider =  contextProvider
                     session.prefersEphemeralWebBrowserSession = preferEphemeral
                 }
 
@@ -99,7 +100,7 @@ extension FlutterViewController: ASWebAuthenticationPresentationContextProviding
 }
 
 fileprivate extension FlutterError {
-    var aquireRootViewControllerFailed: FlutterError {
+    static var aquireRootViewControllerFailed: FlutterError {
         return FlutterError(code: "AQUIRE_ROOT_VIEW_CONTROLLER_FAILED", message: "Failed to aquire root view controller" , details: nil)
     }
 }
