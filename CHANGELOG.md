@@ -1,3 +1,7 @@
+## 0.4.1
+
+- 🎉 Add support for Flutter "add to app" (#106)
+
 ## 0.4.0
 
 - 💥 Upgrade to Android V2 embedding (#87)
@@ -5,7 +9,6 @@
   Migration guide:
 
   Make sure that you are running a recent version of Flutter before upgrading.
-
 
 ## 0.3.2
 
