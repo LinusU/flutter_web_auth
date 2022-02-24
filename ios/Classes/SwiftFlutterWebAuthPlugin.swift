@@ -11,10 +11,13 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if call.method == "authenticate" {
-            let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
-            let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
-            let preferEphemeral = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeral"] as! Bool
+        if call.method == "authenticate",
+           let arguments = call.arguments as? Dictionary<String, AnyObject>,
+           let urlString = arguments["url"] as? String,
+           let url = URL(string: urlString),
+           let callbackURLScheme = arguments["callbackUrlScheme"] as? String,
+           let preferEphemeral = arguments["preferEphemeral"] as? Bool
+        {
 
             var sessionToKeepAlive: Any? = nil // if we do not keep the session alive, it will get closed immediately while showing the dialog
             let completionHandler = { (url: URL?, err: Error?) in
@@ -39,20 +42,36 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                     return
                 }
 
-                result(url!.absoluteString)
+                guard let url = url else {
+                    result(FlutterError(code: "EUNKNOWN", message: "URL was null, but no error provided.", details: nil))
+                    return
+                }
+
+                result(url.absoluteString)
             }
 
             if #available(iOS 12, *) {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
 
                 if #available(iOS 13, *) {
-                    guard let provider = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController else {
-                        result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
+                    guard var topController = UIApplication.shared.keyWindow?.rootViewController else {
+                        result(FlutterError.aquireRootViewControllerFailed)
                         return
                     }
 
+                    while let presentedViewController = topController.presentedViewController {
+                        topController = presentedViewController
+                    }
+                    if let nav = topController as? UINavigationController {
+                        topController = nav.visibleViewController ?? topController
+                    }
+
+                    guard let contextProvider = topController as? ASWebAuthenticationPresentationContextProviding else {
+                        result(FlutterError.aquireRootViewControllerFailed)
+                        return
+                    }
+                    session.presentationContextProvider =  contextProvider
                     session.prefersEphemeralWebBrowserSession = preferEphemeral
-                    session.presentationContextProvider = provider
                 }
 
                 session.start()
@@ -77,5 +96,11 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
 extension FlutterViewController: ASWebAuthenticationPresentationContextProviding {
     public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+fileprivate extension FlutterError {
+    static var aquireRootViewControllerFailed: FlutterError {
+        return FlutterError(code: "AQUIRE_ROOT_VIEW_CONTROLLER_FAILED", message: "Failed to aquire root view controller" , details: nil)
     }
 }
