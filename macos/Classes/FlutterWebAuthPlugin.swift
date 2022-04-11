@@ -14,10 +14,11 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
         if call.method == "authenticate" {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
             let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
+			let preferEphemeral = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeral"] as? Bool
 
-            var keepMe: Any? = nil
+            // var keepMe: Any? = nil
             let completionHandler = { (url: URL?, err: Error?) in
-                keepMe = nil
+                // keepMe = nil
 
                 if let err = err {
                     if case ASWebAuthenticationSessionError.canceledLogin = err {
@@ -33,6 +34,7 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
             }
 
             let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
+			session.prefersEphemeralWebBrowserSession = preferEphemeral ?? false
 
             guard let provider = NSApplication.shared.keyWindow!.contentViewController as? FlutterViewController else {
                 result(FlutterError(code: "FAILED", message: "Failed to aquire root FlutterViewController" , details: nil))
@@ -42,7 +44,7 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
             session.presentationContextProvider = provider
 
             session.start()
-            keepMe = session
+            // keepMe = session
         } else {
             result(FlutterMethodNotImplemented)
         }
