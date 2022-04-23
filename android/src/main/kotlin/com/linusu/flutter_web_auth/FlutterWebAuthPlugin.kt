@@ -50,16 +50,19 @@ class FlutterWebAuthPlugin(private var context: Context? = null, private var cha
 
           callbacks[callbackUrlScheme] = resultCallback
 
-          val intent = CustomTabsIntent.Builder().build()
-          val keepAliveIntent = Intent(context, KeepAliveService::class.java)
+          // val intent = CustomTabsIntent.Builder().build()
+       val browserIntent = Intent(Intent.ACTION_VIEW,Uri.parse(call.argument("url")));
+       browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+context?.startActivity(browserIntent)
+          // val keepAliveIntent = Intent(context, KeepAliveService::class.java)
+// startActivity(browserIntent)
+          // intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+          // if (preferEphemeral) {
+          //     intent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+          // }
+          // intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
 
-          intent.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-          if (preferEphemeral) {
-              intent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-          }
-          intent.intent.putExtra("android.support.customtabs.extra.KEEP_ALIVE", keepAliveIntent)
-
-          intent.launchUrl(context!!, url)
+          // intent.launchUrl(context!!, url)
         }
         "cleanUpDanglingCalls" -> {
           callbacks.forEach{ (_, danglingResultCallback) ->
