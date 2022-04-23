@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
     final server = await HttpServer.bind('127.0.0.1', 43823);
 
     server.listen((req) async {
-      setState(() { _status = 'Received request!'; });
+      setState(() { _status = 'Receive request!'; });
 
       req.response.headers.add('Content-Type', 'text/html');
       req.response.write(html);
