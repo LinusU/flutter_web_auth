@@ -9,7 +9,10 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 class FlutterWebAuthPlugin {
   static void registerWith(Registrar registrar) {
     final MethodChannel channel = MethodChannel(
-        'flutter_web_auth', const StandardMethodCodec(), registrar.messenger);
+      'flutter_web_auth',
+      const StandardMethodCodec(),
+      registrar,
+    );
     final FlutterWebAuthPlugin instance = FlutterWebAuthPlugin();
     channel.setMethodCallHandler(instance.handleMethodCall);
   }
