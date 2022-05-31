@@ -125,8 +125,8 @@ class FlutterWebAuthPlugin(
         }
     }
 
-    override fun onNewIntent(intent: Intent?): Boolean {
-        if (intent != null && intent.action == Intent.ACTION_VIEW &&
+    override fun onNewIntent(intent: Intent): Boolean {
+        if (intent.action == Intent.ACTION_VIEW &&
             intent.hasCategory(Intent.CATEGORY_BROWSABLE)
         ) {
             val url = intent.data
