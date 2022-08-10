@@ -12,30 +12,30 @@ In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenti
 
 | **iOS**                | **Android**                    |
 | ---------------------- | ------------------------------ |
-| ![iOS](screen-ios.gif) | ![Android](screen-android.gif) |
+| ![iOS](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-ios.gif) | ![Android](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-android.gif) |
 
 | **macOS**                  |
 | -------------------------- |
-| ![macOS](screen-macos.gif) |
+| ![macOS](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-macos.gif) |
 
 ## Usage
 
 To authenticate against your own custom site:
 
 ```dart
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
 // Present the dialog to the user
-final result = await FlutterWebAuth.authenticate(url: "https://my-custom-app.com/connect", callbackUrlScheme: "my-custom-app");
+final result = await FlutterWebAuth2.authenticate(url: "https://my-custom-app.com/connect", callbackUrlScheme: "my-custom-app");
 
 // Extract token from resulting url
-final token = Uri.parse(result).queryParameters['token']
+final token = Uri.parse(result).queryParameters['token'];
 ```
 
 To authenticate the user using Google's OAuth2:
 
 ```dart
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
 import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
@@ -53,7 +53,7 @@ final url = Uri.https('accounts.google.com', '/o/oauth2/v2/auth', {
 });
 
 // Present the dialog to the user
-final result = await FlutterWebAuth.authenticate(url: url.toString(), callbackUrlScheme: callbackUrlScheme);
+final result = await FlutterWebAuth2.authenticate(url: url.toString(), callbackUrlScheme: callbackUrlScheme);
 
 // Extract code from resulting url
 final code = Uri.parse(result).queryParameters['code'];
@@ -76,14 +76,14 @@ Setup works as for any Flutter plugin, expect the Android and Web caveats outlin
 
 ### Android
 
-In order to capture the callback url, the following `activity` needs to be added to your `AndroidManifest.xml`. Be sure to relpace `YOUR_CALLBACK_URL_SCHEME_HERE` with your actual callback url scheme.
+In order to capture the callback url, the following `activity` needs to be added to your `AndroidManifest.xml`. Be sure to replace `YOUR_CALLBACK_URL_SCHEME_HERE` with your actual callback url scheme.
 
 ```xml
 <manifest>
   <application>
 
     <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" >
-      <intent-filter android:label="flutter_web_auth">
+      <intent-filter android:label="flutter_web_auth_2">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
@@ -106,7 +106,7 @@ On the Web platform an endpoint needs to be created that captures the callback U
 close the window.
 <script>
   window.opener.postMessage({
-    'flutter-web-auth': window.location.href
+    'flutter-web-auth-2': window.location.href
   }, window.location.origin);
   window.close();
 </script>

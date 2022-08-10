@@ -9,7 +9,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 class FlutterWebAuthPlugin {
   static void registerWith(Registrar registrar) {
     final MethodChannel channel = MethodChannel(
-      'flutter_web_auth',
+      'flutter_web_auth_2',
       const StandardMethodCodec(),
       registrar,
     );
@@ -25,7 +25,7 @@ class FlutterWebAuthPlugin {
       default:
         throw PlatformException(
             code: 'Unimplemented',
-            details: "The flutter_web_auth plugin for web doesn't implement "
+            details: "The flutter_web_auth_2 plugin for web doesn't implement "
                 "the method '${call.method}'");
     }
   }
@@ -34,7 +34,7 @@ class FlutterWebAuthPlugin {
     context.callMethod('open', [url]);
     await for (MessageEvent messageEvent in window.onMessage) {
       if (messageEvent.origin == Uri.base.origin) {
-        final flutterWebAuthMessage = messageEvent.data['flutter-web-auth'];
+        final flutterWebAuthMessage = messageEvent.data['flutter-web-auth-2'];
         if (flutterWebAuthMessage is String) {
           return flutterWebAuthMessage;
         }

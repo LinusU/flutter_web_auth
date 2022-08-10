@@ -16,8 +16,9 @@ class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
   }
 }
 
-class FlutterWebAuth {
-  static const MethodChannel _channel = const MethodChannel('flutter_web_auth');
+class FlutterWebAuth2 {
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_web_auth_2');
 
   static final _OnAppLifecycleResumeObserver _resumedObserver =
       _OnAppLifecycleResumeObserver(() {

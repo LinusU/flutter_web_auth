@@ -28,7 +28,7 @@ class FlutterWebAuthPlugin(private var context: Context? = null, private var cha
 
   fun initInstance(messenger: BinaryMessenger, context: Context) {
       this.context = context
-      channel = MethodChannel(messenger, "flutter_web_auth")
+      channel = MethodChannel(messenger, "flutter_web_auth_2")
       channel?.setMethodCallHandler(this)
   }
 

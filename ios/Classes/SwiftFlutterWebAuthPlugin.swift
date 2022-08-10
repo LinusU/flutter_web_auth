@@ -5,7 +5,7 @@ import UIKit
 
 public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "flutter_web_auth", binaryMessenger: registrar.messenger())
+        let channel = FlutterMethodChannel(name: "flutter_web_auth_2", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterWebAuthPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }

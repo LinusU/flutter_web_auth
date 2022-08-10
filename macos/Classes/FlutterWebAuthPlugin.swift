@@ -5,7 +5,7 @@ import FlutterMacOS
 @available(OSX 10.15, *)
 public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "flutter_web_auth", binaryMessenger: registrar.messenger)
+        let channel = FlutterMethodChannel(name: "flutter_web_auth_2", binaryMessenger: registrar.messenger)
         let instance = FlutterWebAuthPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
