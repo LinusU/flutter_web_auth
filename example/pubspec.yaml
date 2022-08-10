@@ -1,5 +1,5 @@
-name: flutter_web_auth_example
-description: Demonstrates how to use the flutter_web_auth plugin.
+name: flutter_web_auth_2_example
+description: Demonstrates how to use the flutter_web_auth_2 plugin.
 publish_to: 'none'
 
 environment:

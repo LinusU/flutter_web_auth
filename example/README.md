@@ -1,6 +1,6 @@
-# flutter_web_auth_example
+# flutter_web_auth_2_example
 
-Demonstrates how to use the flutter_web_auth plugin.
+Demonstrates how to use the flutter_web_auth_2 plugin.
 
 ## Getting Started
 

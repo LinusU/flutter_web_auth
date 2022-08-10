@@ -1,3 +1,8 @@
+## 1.0.0
+
+- 💥 Old project, new maintainers! Due to the lack of updates in the main project, we forked the project and will update it as time passes!
+- 🎉 Update to Flutter 3 (@noga-dev)
+
 ## 0.4.1
 
 - 🎉 Add support for Flutter "add to app" (#106)
