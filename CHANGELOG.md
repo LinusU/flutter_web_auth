@@ -1,15 +1,16 @@
 ## 1.0.0
 
 - 💥 Old project, new maintainers! Due to the lack of updates in the main project, we forked the project and will update it as time passes!
-- 🎉 Update to Flutter 3 (@noga-dev)
+- 💥 Update to Flutter 3 ([#118](https://github.com/LinusU/flutter_web_auth/pull/118))
+- 🎉 Add support for ephemeral sessions on MacOS ([#112](https://github.com/LinusU/flutter_web_auth/pull/112))
 
 ## 0.4.1
 
-- 🎉 Add support for Flutter "add to app" (#106)
+- 🎉 Add support for Flutter "add to app" ([#106](https://github.com/LinusU/flutter_web_auth/pull/106))
 
 ## 0.4.0
 
-- 💥 Upgrade to Android V2 embedding (#87)
+- 💥 Upgrade to Android V2 embedding ([#87](https://github.com/LinusU/flutter_web_auth/pull/87))
 
   Migration guide:
 
@@ -17,18 +18,18 @@
 
 ## 0.3.2
 
-- 🎉 Add Web support (#77)
+- 🎉 Add Web support ([#77](https://github.com/LinusU/flutter_web_auth/pull/77))
 
 ## 0.3.1
 
-- 🎉 Add support for Android Plugin API v2 (#67)
-- 🎉 Add support for ephemeral sessions (#64)
-- 🌹 Avoid deprecated RaisedButton in example (#75)
+- 🎉 Add support for Android Plugin API v2 ([#67](https://github.com/LinusU/flutter_web_auth/pull/67))
+- 🎉 Add support for ephemeral sessions ([#64](https://github.com/LinusU/flutter_web_auth/pull/64))
+- 🌹 Avoid deprecated RaisedButton in example ([#75](https://github.com/LinusU/flutter_web_auth/pull/75))
 - 🌹 Cleanup metadata
 
 ## 0.3.0
 
-- 💥 Add null safety support (#60)
+- 💥 Add null safety support ([#60](https://github.com/LinusU/flutter_web_auth/pull/60))
 
   Migration guide:
 
