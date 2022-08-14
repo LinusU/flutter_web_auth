@@ -6,54 +6,60 @@ import 'dart:js';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-class FlutterWebAuthPlugin {
+class FlutterWebAuth2WebPlugin {
   static void registerWith(Registrar registrar) {
-    final MethodChannel channel = MethodChannel(
+    final channel = MethodChannel(
       'flutter_web_auth_2',
       const StandardMethodCodec(),
       registrar,
     );
-    final FlutterWebAuthPlugin instance = FlutterWebAuthPlugin();
+    final instance = FlutterWebAuth2WebPlugin();
     channel.setMethodCallHandler(instance.handleMethodCall);
   }
 
   Future<dynamic> handleMethodCall(MethodCall call) async {
     switch (call.method) {
       case 'authenticate':
-        final String url = call.arguments['url'];
+        final url = call.arguments['url'].toString();
         return _authenticate(url);
       default:
         throw PlatformException(
-            code: 'Unimplemented',
-            details: "The flutter_web_auth_2 plugin for web doesn't implement "
-                "the method '${call.method}'");
+          code: 'Unimplemented',
+          details: "The flutter_web_auth_2 plugin for web doesn't implement "
+              "the method '${call.method}'",
+        );
     }
   }
 
   static Future<String> _authenticate(String url) async {
     context.callMethod('open', [url]);
-    await for (MessageEvent messageEvent in window.onMessage) {
+    await for (final MessageEvent messageEvent in window.onMessage) {
       if (messageEvent.origin == Uri.base.origin) {
         final flutterWebAuthMessage = messageEvent.data['flutter-web-auth-2'];
         if (flutterWebAuthMessage is String) {
           return flutterWebAuthMessage;
         }
       }
-      var appleOrigin = Uri(scheme: 'https', host: 'appleid.apple.com');
+      final appleOrigin = Uri(scheme: 'https', host: 'appleid.apple.com');
       if (messageEvent.origin == appleOrigin.toString()) {
         try {
-          Map<String, dynamic> data = jsonDecode(messageEvent.data);
+          final data = jsonDecode(messageEvent.data.toString());
           if (data['method'] == 'oauthDone') {
-            final appleAuth = data['data']['authorization'];
+            final appleAuth =
+                data['data']['authorization'] as Map<String, dynamic>?;
             if (appleAuth != null) {
               final appleAuthQuery = Uri(queryParameters: appleAuth).query;
               return appleOrigin.replace(fragment: appleAuthQuery).toString();
             }
           }
-        } on FormatException {}
+        } on FormatException {
+          // ignore exception
+        }
       }
     }
-    throw new PlatformException(
-        code: 'error', message: 'Iterable window.onMessage is empty');
+    throw PlatformException(
+      code: 'error',
+      message: 'Iterable window.onMessage is empty',
+    );
   }
 }

@@ -2,6 +2,8 @@
 
 - 💥 Old project, new maintainers! Due to the lack of updates in the main project, we forked the project and will update it as time passes!
 - 💥 Update to Flutter 3 ([#118](https://github.com/LinusU/flutter_web_auth/pull/118))
+- 💥 Federated plugin refactor ([#98](https://github.com/LinusU/flutter_web_auth/pull/98))
+- 💥 Windows support (By [Jon-Salmon](https://github.com/Jon-Salmon/flutter_web_auth/tree/windows-implementation))
 - 🎉 Add support for ephemeral sessions on MacOS ([#112](https://github.com/LinusU/flutter_web_auth/pull/112))
 
 ## 0.4.1

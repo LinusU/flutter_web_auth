@@ -6,4 +6,8 @@
 
 build/
 
-.idea
+.idea/
+*.iml
+pubspec.lock
+
+.gradle/

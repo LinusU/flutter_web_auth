@@ -1,0 +1,17 @@
+name: flutter_web_auth_2_platform_interface
+description: A common platform interface for the flutter_web_auth_2 plugin.
+version: 1.0.0
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.1.2
+
+dev_dependencies:
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter

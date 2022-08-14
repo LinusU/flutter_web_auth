@@ -23,7 +23,7 @@ void main() {
 
   test('authenticate', () async {
     expect(
-      await FlutterWebAuth.authenticate(
+      await FlutterWebAuth2.authenticate(
           url: 'https://example.com/login', callbackUrlScheme: 'foobar'),
       'https://example.com/success',
     );

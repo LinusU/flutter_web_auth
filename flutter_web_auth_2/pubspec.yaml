@@ -12,12 +12,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_auth_2_platform_interface: ^1.0.0
+  flutter_web_auth_2_windows: ^1.0.0
   flutter_web_plugins:
     sdk: flutter
 
 dev_dependencies:
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  flutter_web_auth_2_platform_interface:
+    path: ../flutter_web_auth_2_platform_interface
+  flutter_web_auth_2_windows:
+    path: ../flutter_web_auth_2_windows
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -37,6 +46,8 @@ flutter:
         pluginClass: FlutterWebAuthPlugin
       macos:
         pluginClass: FlutterWebAuthPlugin
+      windows:
+        default_package: flutter_web_auth_2_windows
       web:
         pluginClass: FlutterWebAuthPlugin
         fileName: src/flutter_web_auth_2_web.dart
