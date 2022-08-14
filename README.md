@@ -12,11 +12,11 @@ In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenti
 
 | **iOS**                | **Android**                    |
 | ---------------------- | ------------------------------ |
-| ![iOS](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-ios.gif) | ![Android](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-android.gif) |
+| ![iOS](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-ios.gif) | ![Android](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-android.gif) |
 
 | **macOS**                  |
 | -------------------------- |
-| ![macOS](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-macos.gif) |
+| ![macOS](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-macos.gif) |
 
 ## Usage
 
@@ -80,18 +80,18 @@ In order to capture the callback url, the following `activity` needs to be added
 
 ```xml
 <manifest>
-  <application>
+    <application>
 
-    <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" >
-      <intent-filter android:label="flutter_web_auth_2">
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="YOUR_CALLBACK_URL_SCHEME_HERE" />
-      </intent-filter>
-    </activity>
+        <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" >
+            <intent-filter android:label="flutter_web_auth_2">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="YOUR_CALLBACK_URL_SCHEME_HERE" />
+            </intent-filter>
+        </activity>
 
-  </application>
+    </application>
 </manifest>
 ```
 
@@ -103,8 +103,8 @@ On the Web platform an endpoint needs to be created that captures the callback U
 <!DOCTYPE html>
 <title>Authentication complete</title>
 <p>Authentication is complete. If this does not happen automatically, please
-close the window.
-<script>
+    close the window.
+    <script>
   window.opener.postMessage({
     'flutter-web-auth-2': window.location.href
   }, window.location.origin);

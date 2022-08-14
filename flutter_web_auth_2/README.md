@@ -12,11 +12,11 @@ In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenti
 
 | **iOS**                | **Android**                    |
 | ---------------------- | ------------------------------ |
-| ![iOS](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-ios.gif) | ![Android](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-android.gif) |
+| ![iOS](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-ios.gif) | ![Android](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-android.gif) |
 
 | **macOS**                  |
 | -------------------------- |
-| ![macOS](https://github.com/ThexXTURBOXx/flutter_web_auth_2/raw/master/screen-macos.gif) |
+| ![macOS](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-macos.gif) |
 
 ## Usage
 
