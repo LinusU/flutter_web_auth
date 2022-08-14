@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 
-const MethodChannel _kChannel = MethodChannel('flutter_web_auth');
+const MethodChannel _kChannel = MethodChannel('flutter_web_auth_2');
 
 /// Method channel implementation of the [FlutterWebAuth2PlatformInterface].
 class FlutterWebAuth2MethodChannel extends FlutterWebAuth2PlatformInterface {

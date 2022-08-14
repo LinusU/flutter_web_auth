@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.linusu.flutter_web_auth_example">
+    package="com.linusu.flutter_web_auth_2_example">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name="com.linusu.flutter_web_auth.CallbackActivity"
+            android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
             android:exported="true">
             <intent-filter android:label="flutter_web_auth_2">
                 <action android:name="android.intent.action.VIEW" />

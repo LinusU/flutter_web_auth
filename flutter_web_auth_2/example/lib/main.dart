@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:io' show HttpServer;
 
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
-const html = """
+const html = '''
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,21 +55,23 @@ const html = """
 <body>
   <main>
     <div id="icon">&#x1F3C7;</div>
-    <div id="text">Press the button below to sign in using your Localtest.me account.</div>
+    <div id="text">Press the button below to sign in using your localhost account.</div>
     <div id="button"><a href="foobar://success?code=1337">Sign in</a></div>
   </main>
 </body>
 </html>
-""";
+''';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   String _status = '';
 
   @override
@@ -82,47 +84,54 @@ class _MyAppState extends State<MyApp> {
     final server = await HttpServer.bind('127.0.0.1', 43823);
 
     server.listen((req) async {
-      setState(() { _status = 'Received request!'; });
+      setState(() {
+        _status = 'Received request!';
+      });
 
       req.response.headers.add('Content-Type', 'text/html');
       req.response.write(html);
-      req.response.close();
+      await req.response.close();
     });
   }
 
-  void authenticate() async {
-    final url = 'http://localtest.me:43823/';
-    final callbackUrlScheme = 'foobar';
+  Future<void> authenticate() async {
+    const url = 'http://127.0.0.1:43823/';
+    const callbackUrlScheme = 'foobar';
 
     try {
-      final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: callbackUrlScheme);
-      setState(() { _status = 'Got result: $result'; });
+      final result = await FlutterWebAuth2.authenticate(
+        url: url,
+        callbackUrlScheme: callbackUrlScheme,
+      );
+      setState(() {
+        _status = 'Got result: $result';
+      });
     } on PlatformException catch (e) {
-      setState(() { _status = 'Got error: $e'; });
+      setState(() {
+        _status = 'Got error: $e';
+      });
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Web Auth example'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Status: $_status\n'),
-              const SizedBox(height: 80),
-              ElevatedButton(
-                child: Text('Authenticate'),
-                onPressed: () { this.authenticate(); },
-              ),
-            ],
+  Widget build(BuildContext context) => MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Web Auth 2 example'),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Status: $_status\n'),
+                const SizedBox(height: 80),
+                ElevatedButton(
+                  onPressed: authenticate,
+                  child: const Text('Authenticate'),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

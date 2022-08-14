@@ -1,4 +1,4 @@
-package com.linusu.flutter_web_auth
+package com.linusu.flutter_web_auth_2
 
 import android.app.Activity
 import android.net.Uri
@@ -12,7 +12,7 @@ class CallbackActivity: Activity() {
     val scheme = url?.scheme
 
     if (scheme != null) {
-      FlutterWebAuthPlugin.callbacks.remove(scheme)?.success(url.toString())
+      FlutterWebAuth2Plugin.callbacks.remove(scheme)?.success(url.toString())
     }
 
     finish()

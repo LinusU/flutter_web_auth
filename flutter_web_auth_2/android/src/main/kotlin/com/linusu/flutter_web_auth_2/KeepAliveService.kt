@@ -1,4 +1,4 @@
-package com.linusu.flutter_web_auth
+package com.linusu.flutter_web_auth_2
 
 import android.app.Service
 import android.content.Intent

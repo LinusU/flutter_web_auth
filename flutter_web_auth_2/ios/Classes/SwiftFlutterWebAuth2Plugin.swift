@@ -3,10 +3,10 @@ import SafariServices
 import Flutter
 import UIKit
 
-public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
+public class SwiftFlutterWebAuth2Plugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "flutter_web_auth_2", binaryMessenger: registrar.messenger())
-        let instance = SwiftFlutterWebAuthPlugin()
+        let instance = SwiftFlutterWebAuth2Plugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
 

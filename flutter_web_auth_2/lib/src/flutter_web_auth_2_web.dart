@@ -6,14 +6,14 @@ import 'dart:js';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-class FlutterWebAuth2WebPlugin {
+class FlutterWebAuth2Plugin {
   static void registerWith(Registrar registrar) {
     final channel = MethodChannel(
       'flutter_web_auth_2',
       const StandardMethodCodec(),
       registrar,
     );
-    final instance = FlutterWebAuth2WebPlugin();
+    final instance = FlutterWebAuth2Plugin();
     channel.setMethodCallHandler(instance.handleMethodCall);
   }
 

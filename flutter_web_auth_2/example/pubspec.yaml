@@ -6,23 +6,20 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  cupertino_icons: ^1.0.3
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.3
+  flutter_web_auth_2:
+    path: ../
+  flutter_web_auth_2_platform_interface:
+    path: ../../flutter_web_auth_2_platform_interface
+  flutter_web_auth_2_windows:
+    path: ../../flutter_web_auth_2_windows
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_web_auth_2:
-    path: ../
-
-dependency_overrides:
-  flutter_web_auth_2_platform_interface:
-    path: ../../flutter_web_auth_2_platform_interface
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

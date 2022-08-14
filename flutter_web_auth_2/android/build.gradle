@@ -1,4 +1,4 @@
-group 'com.linusu.flutter_web_auth'
+group 'com.linusu.flutter_web_auth_2'
 version '1.0-SNAPSHOT'
 
 buildscript {

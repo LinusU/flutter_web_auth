@@ -12,8 +12,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_auth_2_platform_interface: ^1.0.0
-  flutter_web_auth_2_windows: ^1.0.0
+  flutter_web_auth_2_platform_interface: #TODO: when published: ^1.0.0
+    path: ../flutter_web_auth_2_platform_interface
+  flutter_web_auth_2_windows: #TODO: when published: ^1.0.0
+    path: ../flutter_web_auth_2_windows
   flutter_web_plugins:
     sdk: flutter
 
@@ -21,12 +23,6 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
-
-dependency_overrides:
-  flutter_web_auth_2_platform_interface:
-    path: ../flutter_web_auth_2_platform_interface
-  flutter_web_auth_2_windows:
-    path: ../flutter_web_auth_2_windows
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -40,16 +36,16 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.linusu.flutter_web_auth
-        pluginClass: FlutterWebAuthPlugin
+        package: com.linusu.flutter_web_auth_2
+        pluginClass: FlutterWebAuth2Plugin
       ios:
-        pluginClass: FlutterWebAuthPlugin
+        pluginClass: FlutterWebAuth2Plugin
       macos:
-        pluginClass: FlutterWebAuthPlugin
+        pluginClass: FlutterWebAuth2Plugin
       windows:
         default_package: flutter_web_auth_2_windows
       web:
-        pluginClass: FlutterWebAuthPlugin
+        pluginClass: FlutterWebAuth2Plugin
         fileName: src/flutter_web_auth_2_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:

@@ -11,20 +11,17 @@ flutter:
     implements: flutter_web_auth_2
     platforms:
       windows:
-        dartPluginClass: FlutterWebAuthWindows
+        dartPluginClass: FlutterWebAuth2Windows
         pluginClass: none
 
 dependencies:
   ffi: ^2.0.1
   flutter:
     sdk: flutter
-  flutter_web_auth_2_platform_interface: ^1.0.0
+  flutter_web_auth_2_platform_interface: #TODO: when published: ^1.0.0
+    path: ../flutter_web_auth_2_platform_interface
   url_launcher: ^6.1.5
   win32: ^2.7.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
-
-dependency_overrides:
-  flutter_web_auth_2_platform_interface:
-    path: ../flutter_web_auth_2_platform_interface

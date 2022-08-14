@@ -42,13 +42,13 @@ const html = '''
 </html>
 ''';
 
-class FlutterWebAuthWindows extends FlutterWebAuth2PlatformInterface {
+class FlutterWebAuth2Windows extends FlutterWebAuth2PlatformInterface {
   HttpServer? _server;
   Timer? _authTimeout;
 
   /// Registers the Windows implementation.
   static void registerWith() {
-    FlutterWebAuth2PlatformInterface.instance = FlutterWebAuthWindows();
+    FlutterWebAuth2PlatformInterface.instance = FlutterWebAuth2Windows();
   }
 
   @override

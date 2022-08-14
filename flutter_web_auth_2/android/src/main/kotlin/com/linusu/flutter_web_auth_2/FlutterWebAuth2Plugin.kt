@@ -1,4 +1,4 @@
-package com.linusu.flutter_web_auth
+package com.linusu.flutter_web_auth_2
 
 import android.content.Context
 import android.content.Intent
@@ -14,13 +14,13 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
-class FlutterWebAuthPlugin(private var context: Context? = null, private var channel: MethodChannel? = null): MethodCallHandler, FlutterPlugin {
+class FlutterWebAuth2Plugin(private var context: Context? = null, private var channel: MethodChannel? = null): MethodCallHandler, FlutterPlugin {
   companion object {
     val callbacks = mutableMapOf<String, Result>()
 
     @JvmStatic
     fun registerWith(registrar: Registrar) {
-        val plugin = FlutterWebAuthPlugin()
+        val plugin = FlutterWebAuth2Plugin()
         plugin.initInstance(registrar.messenger(), registrar.context())
     }
 
