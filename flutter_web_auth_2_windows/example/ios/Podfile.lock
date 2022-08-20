@@ -1,0 +1,23 @@
+PODS:
+  - Flutter (2.0.2)
+  - flutter_web_auth (0.4.1):
+    - Flutter
+
+DEPENDENCIES:
+  - flutter_web_auth (from `.symlinks/plugins/flutter_web_auth/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Flutter
+
+EXTERNAL SOURCES:
+  flutter_web_auth:
+    :path: ".symlinks/plugins/flutter_web_auth/ios"
+
+SPEC CHECKSUMS:
+  Flutter: c48dd2c06f81cd2d28c2d5e68a129c76508452c2
+  flutter_web_auth: 09a0abd245f1a07a3ff4dcf1247a048d89ee12a9
+
+PODFILE CHECKSUM: 58760ca3c5878cb71ae11bd6eeff33fd4ce06e4f
+
+COCOAPODS: 1.10.1
