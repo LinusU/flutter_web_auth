@@ -88,18 +88,18 @@ In order to capture the callback url, the following `activity` needs to be added
 
 ```xml
 <manifest>
-    <application>
+  <application>
 
-        <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" >
-            <intent-filter android:label="flutter_web_auth_2">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="YOUR_CALLBACK_URL_SCHEME_HERE" />
-            </intent-filter>
-        </activity>
+    <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" >
+      <intent-filter android:label="flutter_web_auth_2">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="YOUR_CALLBACK_URL_SCHEME_HERE" />
+      </intent-filter>
+    </activity>
 
-    </application>
+  </application>
 </manifest>
 ```
 
@@ -110,9 +110,8 @@ On the Web platform an endpoint needs to be created that captures the callback U
 ```html
 <!DOCTYPE html>
 <title>Authentication complete</title>
-<p>Authentication is complete. If this does not happen automatically, please
-    close the window.
-    <script>
+<p>Authentication is complete. If this does not happen automatically, please close the window.
+<script>
   window.opener.postMessage({
     'flutter-web-auth-2': window.location.href
   }, window.location.origin);

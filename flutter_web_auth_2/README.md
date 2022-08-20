@@ -70,6 +70,14 @@ final response = await http.post('https://www.googleapis.com/oauth2/v4/token', b
 final accessToken = jsonDecode(response.body)['access_token'] as String;
 ```
 
+## Upgrading from `flutter_web_auth`
+
+If you used `flutter_web_auth` correctly (and without extra hackage) before, it should be sufficient to replace the following strings *everywhere* (yes, also in `AndroidManifest.xml` for example):
+- `FlutterWebAuth` -> `FlutterWebAuth2`
+- `flutter_web_auth` -> `flutter_web_auth_2`
+
+If you are still unsure or something is not working as well as before, please [open a new issue]().
+
 ## Setup
 
 Setup works as for any Flutter plugin, expect the Android and Web caveats outlined below:
@@ -102,8 +110,7 @@ On the Web platform an endpoint needs to be created that captures the callback U
 ```html
 <!DOCTYPE html>
 <title>Authentication complete</title>
-<p>Authentication is complete. If this does not happen automatically, please
-close the window.
+<p>Authentication is complete. If this does not happen automatically, please close the window.
 <script>
   window.opener.postMessage({
     'flutter-web-auth-2': window.location.href
