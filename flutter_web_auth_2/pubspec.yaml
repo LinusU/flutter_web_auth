@@ -12,8 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_auth_2_platform_interface: ^1.0.0
-  flutter_web_auth_2_windows: ^1.0.0
+  flutter_web_auth_2_platform_interface: ^1.0.1
+  flutter_web_auth_2_windows: ^1.0.1
   flutter_web_plugins:
     sdk: flutter
 
