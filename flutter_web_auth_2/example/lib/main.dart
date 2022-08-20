@@ -102,6 +102,7 @@ class MyAppState extends State<MyApp> {
       final result = await FlutterWebAuth2.authenticate(
         url: url,
         callbackUrlScheme: callbackUrlScheme,
+        // If needed: preferEphemeral: true,
       );
       setState(() {
         _status = 'Got result: $result';
