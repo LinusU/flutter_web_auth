@@ -1,0 +1,23 @@
+PODS:
+  - flutter_web_auth (0.4.0):
+    - FlutterMacOS
+  - FlutterMacOS (2.0.0)
+
+DEPENDENCIES:
+  - flutter_web_auth (from `Flutter/ephemeral/.symlinks/plugins/flutter_web_auth/macos`)
+
+SPEC REPOS:
+  trunk:
+    - FlutterMacOS
+
+EXTERNAL SOURCES:
+  flutter_web_auth:
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_web_auth/macos
+
+SPEC CHECKSUMS:
+  flutter_web_auth: 0432fb32dd550d65cc874aa596d952b2add0ad9d
+  FlutterMacOS: 2f1b456c4d9436c4d4d13919bd3be8ef03ba6322
+
+PODFILE CHECKSUM: 882fce9150893cd66c23bbd28a572b3439b8ac6d
+
+COCOAPODS: 1.10.1
