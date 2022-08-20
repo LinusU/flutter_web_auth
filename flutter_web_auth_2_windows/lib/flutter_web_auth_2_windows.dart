@@ -8,6 +8,7 @@ import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platfor
 import 'package:url_launcher/url_launcher.dart';
 import 'package:win32/win32.dart';
 
+/// HTML code that generates a nice callback page.
 const html = '''
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,7 @@ const html = '''
 </html>
 ''';
 
+/// Implements the plugin interface for Windows.
 class FlutterWebAuth2Windows extends FlutterWebAuth2PlatformInterface {
   HttpServer? _server;
   Timer? _authTimeout;
