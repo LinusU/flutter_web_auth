@@ -1,3 +1,9 @@
+## 1.0.1
+
+- 🐛 Remove path dependency
+- 🌹 Add migration guide README
+- 🌹 Add more documentation
+
 ## 1.0.0
 
 - 💥 Old project, new maintainers! Due to the lack of updates in the main project, we forked the project and will update it as time passes!
