@@ -1,3 +1,10 @@
+## 1.1.0
+
+- 🌹 Tested `flutter_web_auth_2` with Flutter `3.3.0`, seems to work!
+- 🌹 Update `win32` to `3.0.0` (relevant only for Windows users)
+- 🌹 Add `android:exported` tag to documentation *before* users start to complain
+- 🌹 Overhauled example layout
+
 ## 1.0.1
 
 - 🐛 Remove path dependency

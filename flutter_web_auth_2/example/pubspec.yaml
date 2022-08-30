@@ -9,7 +9,8 @@ dependencies:
   cupertino_icons: ^1.0.3
   flutter:
     sdk: flutter
-  flutter_web_auth_2: ^1.0.0
+  flutter_web_auth_2:
+    path: ..
 
 dev_dependencies:
   flutter_test:

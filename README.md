@@ -90,7 +90,9 @@ In order to capture the callback url, the following `activity` needs to be added
 <manifest>
   <application>
 
-    <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" >
+    <activity
+      android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
+      android:exported="true">
       <intent-filter android:label="flutter_web_auth_2">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
