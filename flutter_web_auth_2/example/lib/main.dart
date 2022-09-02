@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io' show HttpServer;
+import 'dart:io' show HttpServer, Platform;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +56,7 @@ const html = '''
   <main>
     <div id="icon">&#x1F3C7;</div>
     <div id="text">Press the button below to sign in using your localhost account.</div>
-    <div id="button"><a href="foobar://success?code=1337">Sign in</a></div>
+    <div id="button"><a href="CALLBACK_URL_HERE">Sign in</a></div>
   </main>
 </body>
 </html>
@@ -89,14 +89,29 @@ class MyAppState extends State<MyApp> {
       });
 
       req.response.headers.add('Content-Type', 'text/html');
-      req.response.write(html);
+
+      // Windows needs some callback URL on localhost
+      req.response.write(
+        Platform.isWindows
+            ? html.replaceFirst(
+                'CALLBACK_URL_HERE',
+                'http://localhost:43824/success?code=1337',
+              )
+            : html.replaceFirst(
+                'CALLBACK_URL_HERE',
+                'foobar://success?code=1337',
+              ),
+      );
+
       await req.response.close();
     });
   }
 
   Future<void> authenticate() async {
     const url = 'http://127.0.0.1:43823/';
-    const callbackUrlScheme = 'foobar';
+    // Windows needs some callback URL on localhost
+    final callbackUrlScheme =
+        Platform.isWindows ? 'http://localhost:43824' : 'foobar';
 
     try {
       final result = await FlutterWebAuth2.authenticate(
