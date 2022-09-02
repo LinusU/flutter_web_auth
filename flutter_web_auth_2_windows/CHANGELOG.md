@@ -1,3 +1,7 @@
+## 1.1.2
+
+- 🌹 Support `win32` versions `2.7.0` until `3.x`
+
 ## 1.1.1
 
 - 🌹 `127.0.0.1` is now also a supported callback URL host

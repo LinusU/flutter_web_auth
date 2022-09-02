@@ -1,3 +1,7 @@
+## 1.1.2
+
+- No change
+
 ## 1.1.1
 
 - 🌹 Cleaned up platform implementations

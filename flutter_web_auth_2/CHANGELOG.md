@@ -1,3 +1,7 @@
+## 1.1.2
+
+- 🌹 Support `win32` versions `2.7.0` until `3.x`
+
 ## 1.1.1
 
 - 🐛 Fix Windows support and support for future platforms
