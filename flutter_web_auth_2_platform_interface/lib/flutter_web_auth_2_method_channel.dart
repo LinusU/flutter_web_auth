@@ -11,14 +11,14 @@ class FlutterWebAuth2MethodChannel extends FlutterWebAuth2PlatformInterface {
     required String callbackUrlScheme,
     required bool preferEphemeral,
   }) async =>
-      (await _kChannel.invokeMethod<String>('authenticate', <String, dynamic>{
+      await _kChannel.invokeMethod<String>('authenticate', <String, dynamic>{
         'url': url,
         'callbackUrlScheme': callbackUrlScheme,
         'preferEphemeral': preferEphemeral,
-      }))!;
+      }) ??
+      '';
 
   @override
-  Future clearAllDanglingCalls() async {
-    await _kChannel.invokeMethod('cleanUpDanglingCalls');
-  }
+  Future clearAllDanglingCalls() async =>
+      _kChannel.invokeMethod('cleanUpDanglingCalls');
 }

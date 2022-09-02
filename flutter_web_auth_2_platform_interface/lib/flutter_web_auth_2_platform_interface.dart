@@ -28,13 +28,10 @@ abstract class FlutterWebAuth2PlatformInterface extends PlatformInterface {
     required String url,
     required String callbackUrlScheme,
     required bool preferEphemeral,
-  }) {
-    throw UnimplementedError('authenticate() has not been implemented.');
-  }
+  }) =>
+      throw UnimplementedError('authenticate() has not been implemented.');
 
-  Future clearAllDanglingCalls() {
-    throw UnimplementedError(
-      'clearAllDanglingCalls() has not been implemented.',
-    );
-  }
+  Future clearAllDanglingCalls() => throw UnimplementedError(
+        'clearAllDanglingCalls() has not been implemented.',
+      );
 }

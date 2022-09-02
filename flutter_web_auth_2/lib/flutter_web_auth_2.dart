@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart' show MethodChannel;
+import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 
 class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
   final Function onResumed;
@@ -17,8 +17,6 @@ class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
 }
 
 class FlutterWebAuth2 {
-  static const MethodChannel _channel = MethodChannel('flutter_web_auth_2');
-
   static final _OnAppLifecycleResumeObserver _resumedObserver =
       _OnAppLifecycleResumeObserver(_cleanUpDanglingCalls);
 
@@ -44,11 +42,11 @@ class FlutterWebAuth2 {
       _resumedObserver,
     ); // safety measure so we never add this observer twice
     WidgetsBinding.instance.addObserver(_resumedObserver);
-    return await _channel.invokeMethod('authenticate', <String, dynamic>{
-      'url': url,
-      'callbackUrlScheme': callbackUrlScheme,
-      'preferEphemeral': preferEphemeral ?? false,
-    }) as String;
+    return FlutterWebAuth2PlatformInterface.instance.authenticate(
+      url: url,
+      callbackUrlScheme: callbackUrlScheme,
+      preferEphemeral: preferEphemeral ?? false,
+    );
   }
 
   /// On Android, the plugin has to store the Result callbacks in order to pass
@@ -56,7 +54,7 @@ class FlutterWebAuth2 {
   /// comes the callback will dangle around forever. This can be called to
   /// terminate all `authenticate` calls with an error.
   static Future<void> _cleanUpDanglingCalls() async {
-    await _channel.invokeMethod('cleanUpDanglingCalls');
+    await FlutterWebAuth2PlatformInterface.instance.clearAllDanglingCalls();
     WidgetsBinding.instance.removeObserver(_resumedObserver);
   }
 }
