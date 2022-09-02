@@ -63,7 +63,7 @@ class FlutterWebAuth2Windows extends FlutterWebAuth2PlatformInterface {
     final callbackUri = Uri.parse(callbackUrlScheme);
 
     if (callbackUri.scheme != 'http' ||
-        callbackUri.host != 'localhost' ||
+        (callbackUri.host != 'localhost' && callbackUri.host != '127.0.0.1') ||
         !callbackUri.hasPort) {
       throw ArgumentError(
         'Callback url scheme must start with http://localhost:{port}',
