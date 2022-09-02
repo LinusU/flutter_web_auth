@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
  - Device: [e.g. iPhone 6, Desktop Computer]
  - OS: [e.g. iOS 8.1, Windows 10 21H2]
  - Browser: [e.g. Stock, Chrome, Safari, Firefox]
- - `flutter_web_auth_2` version: [e.g. 1.0.0]
+ - `flutter_web_auth_2` version: [e.g. 1.1.1]
 
 ## Additional context
 Add any other context about the problem here.
