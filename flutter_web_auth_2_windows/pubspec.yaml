@@ -23,7 +23,7 @@ dependencies:
     sdk: flutter
   flutter_web_auth_2_platform_interface: ^1.1.1
   url_launcher: ^6.1.5
-  win32: ^3.0.0
+  win32: ">=2.7.0 <4.0.0"
 
 dev_dependencies:
   flutter_lints: ^2.0.1
