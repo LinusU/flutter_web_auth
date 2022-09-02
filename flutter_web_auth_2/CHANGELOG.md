@@ -1,3 +1,10 @@
+## 1.1.1
+
+- 🐛 Fix Windows support and support for future platforms
+- 🐛 Fix example on Windows
+- 🌹 `127.0.0.1` is now also a supported callback URL host on Windows
+- 🌹 Cleaned up platform implementations
+
 ## 1.1.0
 
 - 🌹 Tested `flutter_web_auth_2` with Flutter `3.3.0`, seems to work!
