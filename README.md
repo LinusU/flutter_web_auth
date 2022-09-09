@@ -49,7 +49,8 @@ final url = Uri.https('accounts.google.com', '/o/oauth2/v2/auth', {
   'redirect_uri': '$callbackUrlScheme:/',
   'scope': 'email',
 });
-
+// google multiple scopes 
+'scope':'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar.events '
 // Present the dialog to the user
 final result = await FlutterWebAuth.authenticate(url: url.toString(), callbackUrlScheme: callbackUrlScheme);
 
