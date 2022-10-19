@@ -4,24 +4,30 @@ import 'dart:html';
 import 'dart:js';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-class FlutterWebAuth2Plugin {
+class FlutterWebAuth2WebPlugin extends FlutterWebAuth2Platform {
   static void registerWith(Registrar registrar) {
     final channel = MethodChannel(
       'flutter_web_auth_2',
       const StandardMethodCodec(),
       registrar,
     );
-    final instance = FlutterWebAuth2Plugin();
+    final instance = FlutterWebAuth2WebPlugin();
     channel.setMethodCallHandler(instance.handleMethodCall);
+    FlutterWebAuth2Platform.instance = instance;
   }
 
   Future<dynamic> handleMethodCall(MethodCall call) async {
     switch (call.method) {
       case 'authenticate':
         final url = call.arguments['url'].toString();
-        return _authenticate(url);
+        return authenticate(
+          url: url,
+          callbackUrlScheme: '',
+          preferEphemeral: false,
+        );
       default:
         throw PlatformException(
           code: 'Unimplemented',
@@ -31,7 +37,12 @@ class FlutterWebAuth2Plugin {
     }
   }
 
-  static Future<String> _authenticate(String url) async {
+  @override
+  Future<String> authenticate({
+    required String url,
+    required String callbackUrlScheme,
+    required bool preferEphemeral,
+  }) async {
     context.callMethod('open', [url]);
     await for (final MessageEvent messageEvent in window.onMessage) {
       if (messageEvent.origin == Uri.base.origin) {

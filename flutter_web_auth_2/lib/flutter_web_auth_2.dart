@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 
+export 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
+
+export 'src/flutter_web_auth_2_windows.dart'
+    if (dart.library.html) 'src/flutter_web_auth_2_web.dart';
+
 class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
   final Function onResumed;
 
@@ -17,6 +22,9 @@ class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
 }
 
 class FlutterWebAuth2 {
+  static FlutterWebAuth2Platform get _platform =>
+      FlutterWebAuth2Platform.instance;
+
   static final _OnAppLifecycleResumeObserver _resumedObserver =
       _OnAppLifecycleResumeObserver(_cleanUpDanglingCalls);
 
@@ -42,7 +50,7 @@ class FlutterWebAuth2 {
       _resumedObserver,
     ); // safety measure so we never add this observer twice
     WidgetsBinding.instance.addObserver(_resumedObserver);
-    return FlutterWebAuth2PlatformInterface.instance.authenticate(
+    return _platform.authenticate(
       url: url,
       callbackUrlScheme: callbackUrlScheme,
       preferEphemeral: preferEphemeral ?? false,
@@ -54,7 +62,7 @@ class FlutterWebAuth2 {
   /// comes the callback will dangle around forever. This can be called to
   /// terminate all `authenticate` calls with an error.
   static Future<void> _cleanUpDanglingCalls() async {
-    await FlutterWebAuth2PlatformInterface.instance.clearAllDanglingCalls();
+    await _platform.clearAllDanglingCalls();
     WidgetsBinding.instance.removeObserver(_resumedObserver);
   }
 }

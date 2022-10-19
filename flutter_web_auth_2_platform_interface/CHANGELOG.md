@@ -1,3 +1,7 @@
+## 2.0.0
+
+- 💥 Full two-package federated plugin refactor
+
 ## 1.1.2
 
 - No change

@@ -1,17 +1,17 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 
-const MethodChannel _kChannel = MethodChannel('flutter_web_auth_2');
+/// Method channel implementation of the [FlutterWebAuth2Platform].
+class FlutterWebAuth2MethodChannel extends FlutterWebAuth2Platform {
+  static const MethodChannel channel = MethodChannel('flutter_web_auth_2');
 
-/// Method channel implementation of the [FlutterWebAuth2PlatformInterface].
-class FlutterWebAuth2MethodChannel extends FlutterWebAuth2PlatformInterface {
   @override
   Future<String> authenticate({
     required String url,
     required String callbackUrlScheme,
     required bool preferEphemeral,
   }) async =>
-      await _kChannel.invokeMethod<String>('authenticate', <String, dynamic>{
+      await channel.invokeMethod<String>('authenticate', <String, dynamic>{
         'url': url,
         'callbackUrlScheme': callbackUrlScheme,
         'preferEphemeral': preferEphemeral,
@@ -20,5 +20,5 @@ class FlutterWebAuth2MethodChannel extends FlutterWebAuth2PlatformInterface {
 
   @override
   Future clearAllDanglingCalls() async =>
-      _kChannel.invokeMethod('cleanUpDanglingCalls');
+      channel.invokeMethod('cleanUpDanglingCalls');
 }

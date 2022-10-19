@@ -16,6 +16,10 @@
 - 🌹 Add `android:exported` tag to documentation *before* users start to complain
 - 🌹 Overhauled example layout
 
+## 2.0.0
+
+- 💥 Full two-package federated plugin refactor
+
 ## 1.0.1
 
 - 🐛 Remove path dependency

@@ -44,13 +44,13 @@ const html = '''
 ''';
 
 /// Implements the plugin interface for Windows.
-class FlutterWebAuth2Windows extends FlutterWebAuth2PlatformInterface {
+class FlutterWebAuth2WindowsPlugin extends FlutterWebAuth2Platform {
   HttpServer? _server;
   Timer? _authTimeout;
 
   /// Registers the Windows implementation.
   static void registerWith() {
-    FlutterWebAuth2PlatformInterface.instance = FlutterWebAuth2Windows();
+    FlutterWebAuth2Platform.instance = FlutterWebAuth2WindowsPlugin();
   }
 
   @override
