@@ -8,7 +8,7 @@ In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenti
 
 [ASWebAuthenticationSession]: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession
 [SFAuthenticationSession]: https://developer.apple.com/documentation/safariservices/sfauthenticationsession
-[Chrome Custom Tabs]: https://developer.chrome.com/multidevice/android/customtabs
+[Chrome Custom Tabs]: https://developer.chrome.com/docs/android/custom-tabs/
 
 | **iOS**                | **Android**                    |
 | ---------------------- | ------------------------------ |
@@ -124,3 +124,9 @@ On the Web platform an endpoint needs to be created that captures the callback U
 Redirection URL passed to the authentication service must be the same as the URL on which the application is running (schema, host, port if necessary) and the path must point to created HTML file, `/auth.html` in this case. The `callbackUrlScheme` parameter of the `authenticate()` method does not take into account, so it is possible to use a schema for native platforms in the code.
 
 For the Sign in with Apple in web_message response mode, postMessage from https://appleid.apple.com is also captured, and the authorization object is returned as a URL fragment encoded as a query string (for compatibility with other providers).
+
+### Windows
+
+There is still a limitation that the callback URL scheme must start with `http://localhost:{port}`.
+
+If you have any experience in removing that limitation, please let me know!
