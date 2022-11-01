@@ -28,4 +28,11 @@ void main() {
       'https://example.com/success',
     );
   });
+
+  test('invalid scheme', () async {
+    await expectLater(
+      FlutterWebAuth.authenticate(url: 'https://example.com/login', callbackUrlScheme: 'foobar://test'),
+      throwsA(isA<ArgumentError>()),
+    );
+  });
 }
