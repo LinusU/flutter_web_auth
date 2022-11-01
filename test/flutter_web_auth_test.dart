@@ -5,6 +5,8 @@ import 'package:flutter_web_auth/flutter_web_auth.dart';
 void main() {
   const MethodChannel channel = MethodChannel('flutter_web_auth');
 
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       expect(methodCall.method, 'authenticate');
