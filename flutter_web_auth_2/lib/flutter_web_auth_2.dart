@@ -22,6 +22,7 @@ class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
 }
 
 class FlutterWebAuth2 {
+  static RegExp _schemeRegExp = new RegExp(r"^[a-z][a-z0-9+.-]*$");
   static FlutterWebAuth2Platform get _platform =>
       FlutterWebAuth2Platform.instance;
 
@@ -46,6 +47,10 @@ class FlutterWebAuth2 {
     required String callbackUrlScheme,
     bool? preferEphemeral,
   }) async {
+    if (!_schemeRegExp.hasMatch(callbackUrlScheme)) {
+      throw ArgumentError.value(callbackUrlScheme, 'callbackUrlScheme', 'must be a valid URL scheme');
+    }
+
     WidgetsBinding.instance.removeObserver(
       _resumedObserver,
     ); // safety measure so we never add this observer twice

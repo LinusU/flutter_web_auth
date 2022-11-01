@@ -16,9 +16,9 @@ public class FlutterWebAuth2Plugin: NSObject, FlutterPlugin {
             let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
 			let preferEphemeral = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeral"] as? Bool
 
-            // var keepMe: Any? = nil
+            var keepMe: Any? = nil
             let completionHandler = { (url: URL?, err: Error?) in
-                // keepMe = nil
+                keepMe = nil
 
                 if let err = err {
                     if case ASWebAuthenticationSessionError.canceledLogin = err {
@@ -44,7 +44,7 @@ public class FlutterWebAuth2Plugin: NSObject, FlutterPlugin {
             session.presentationContextProvider = provider
 
             session.start()
-            // keepMe = session
+            keepMe = session
         } else {
             result(FlutterMethodNotImplemented)
         }
