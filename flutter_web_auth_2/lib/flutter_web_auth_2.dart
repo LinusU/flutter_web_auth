@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 
 export 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
@@ -41,11 +42,21 @@ class FlutterWebAuth2 {
   /// [preferEphemeral] if this is specified as `true`, an ephemeral web browser
   /// session will be used where possible (`FLAG_ACTIVITY_NO_HISTORY` on
   /// Android, `prefersEphemeralWebBrowserSession` on iOS/macOS).
+  ///
+  /// [redirectOriginOverride] is used to override the origin of the redirect
+  /// URL. This is useful for cases where the redirect URL is not on the same
+  /// domain (ex. local testing)
   static Future<String> authenticate({
     required String url,
     required String callbackUrlScheme,
     bool? preferEphemeral,
+    String? redirectOriginOverride,
   }) async {
+    assert(
+      redirectOriginOverride == null || kDebugMode,
+      'Do not use redirectOriginOverride in production',
+    );
+
     WidgetsBinding.instance.removeObserver(
       _resumedObserver,
     ); // safety measure so we never add this observer twice
@@ -54,6 +65,7 @@ class FlutterWebAuth2 {
       url: url,
       callbackUrlScheme: callbackUrlScheme,
       preferEphemeral: preferEphemeral ?? false,
+      redirectOriginOverride: redirectOriginOverride,
     );
   }
 

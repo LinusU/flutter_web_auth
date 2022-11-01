@@ -27,6 +27,8 @@ class FlutterWebAuth2WebPlugin extends FlutterWebAuth2Platform {
           url: url,
           callbackUrlScheme: '',
           preferEphemeral: false,
+          redirectOriginOverride:
+              call.arguments['redirectOriginOverride']?.toString(),
         );
       default:
         throw PlatformException(
@@ -42,10 +44,11 @@ class FlutterWebAuth2WebPlugin extends FlutterWebAuth2Platform {
     required String url,
     required String callbackUrlScheme,
     required bool preferEphemeral,
+    String? redirectOriginOverride,
   }) async {
     context.callMethod('open', [url]);
     await for (final MessageEvent messageEvent in window.onMessage) {
-      if (messageEvent.origin == Uri.base.origin) {
+      if (messageEvent.origin == (redirectOriginOverride ?? Uri.base.origin)) {
         final flutterWebAuthMessage = messageEvent.data['flutter-web-auth-2'];
         if (flutterWebAuthMessage is String) {
           return flutterWebAuthMessage;
