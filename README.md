@@ -68,6 +68,8 @@ final response = await http.post('https://www.googleapis.com/oauth2/v4/token', b
 final accessToken = jsonDecode(response.body)['access_token'] as String;
 ```
 
+**Note:** To use multiple scopes with Google, you need to encode them as a single string, separated by spaces. For example, `scope: 'email https://www.googleapis.com/auth/userinfo.profile'`. Here is [a list of all supported scopes](https://developers.google.com/identity/protocols/oauth2/scopes).
+
 ## Setup
 
 Setup works as for any Flutter plugin, expect the Android and Web caveats outlined below:
