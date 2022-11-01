@@ -24,6 +24,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependency_overrides:
+  flutter_web_auth_2_platform_interface:
+    path: ../flutter_web_auth_2_platform_interface
+
 flutter:
   plugin:
     platforms:

@@ -27,11 +27,13 @@ abstract class FlutterWebAuth2Platform extends PlatformInterface {
     required String url,
     required String callbackUrlScheme,
     required bool preferEphemeral,
+    String? redirectOriginOverride,
   }) =>
       _instance.authenticate(
         url: url,
         callbackUrlScheme: callbackUrlScheme,
         preferEphemeral: preferEphemeral,
+        redirectOriginOverride: redirectOriginOverride,
       );
 
   Future clearAllDanglingCalls() => _instance.clearAllDanglingCalls();

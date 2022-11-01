@@ -58,6 +58,7 @@ class FlutterWebAuth2WindowsPlugin extends FlutterWebAuth2Platform {
     required String url,
     required String callbackUrlScheme,
     required bool preferEphemeral,
+    String? redirectOriginOverride,
   }) async {
     // Validate callback url
     final callbackUri = Uri.parse(callbackUrlScheme);
