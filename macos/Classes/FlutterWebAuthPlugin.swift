@@ -14,6 +14,7 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
         if call.method == "authenticate" {
             let url = URL(string: (call.arguments as! Dictionary<String, AnyObject>)["url"] as! String)!
             let callbackURLScheme = (call.arguments as! Dictionary<String, AnyObject>)["callbackUrlScheme"] as! String
+            let preferEphemeral = (call.arguments as! Dictionary<String, AnyObject>)["preferEphemeral"] as! Bool
 
             var keepMe: Any? = nil
             let completionHandler = { (url: URL?, err: Error?) in
@@ -40,6 +41,7 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
             }
 
             session.presentationContextProvider = provider
+            session.prefersEphemeralWebBrowserSession = preferEphemeral
 
             session.start()
             keepMe = session
