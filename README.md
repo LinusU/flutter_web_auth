@@ -80,7 +80,7 @@ In order to capture the callback url, the following `activity` needs to be added
 <manifest>
   <application>
 
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" >
+    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
       <intent-filter android:label="flutter_web_auth">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -148,7 +148,7 @@ When you use this package for the first time, there are some problems you may ha
       <application>
 
         <!-- add the com.linusu.flutter_web_auth.CallbackActivity activity -->
-        <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" >
+        <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
           <intent-filter android:label="flutter_web_auth">
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
@@ -167,7 +167,7 @@ When you use this package for the first time, there are some problems you may ha
     <manifest>
       <application>
 
-        <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" >
+        <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
           <intent-filter android:label="flutter_web_auth">
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
@@ -178,6 +178,13 @@ When you use this package for the first time, there are some problems you may ha
 
       </application>
     </manifest>
+    ```
+
+- If you are targeting S+ (version 31 and above) you need to provide an explicit value for `android:exported`. If you followed earlier installation instructions this was not included. Make sure that you add `android:exported="true"` to the `com.linusu.flutter_web_auth.CallbackActivity` activity in your `AndroidManifest.xml` file.
+
+    ```diff
+    - <activity android:name="com.linusu.flutter_web_auth.CallbackActivity">
+    + <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
     ```
 
 ### Troubleshooting OAuth redirects
