@@ -229,3 +229,7 @@ When you use this package for the first time, there are some problems you may ha
     String accessToken = Uri.parse(result).queryParameters['access-token'];
     String userId = Uri.parse(result).queryParameters['user_id'];
     ```
+
+### Cannot open keyboard on iOS
+
+This seems to be a bug in `ASWebAuthenticationSession`, and no work around have been found. Please see [issue #120](https://github.com/LinusU/flutter_web_auth/issues/120) for more info.
