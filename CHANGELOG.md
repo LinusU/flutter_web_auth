@@ -1,3 +1,10 @@
+## 0.4.2
+
+- 🎉 Add `preferEphemeral` support on macOS
+- 🐛 Remove null aware operators from not null widgets (#132)
+- 🐛 Throw a proper error on invalid callback scheme
+- 🌹 Add troubleshooting documentation
+
 ## 0.4.1
 
 - 🎉 Add support for Flutter "add to app" (#106)
