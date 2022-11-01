@@ -240,3 +240,7 @@ When you use this package for the first time, there are some problems you may ha
 ### Cannot open keyboard on iOS
 
 This seems to be a bug in `ASWebAuthenticationSession`, and no work around have been found. Please see [issue #120](https://github.com/LinusU/flutter_web_auth/issues/120) for more info.
+
+### Error on macOS if Chrome is default browser
+
+This seems to be a bug in `ASWebAuthenticationSession`, and no work around have been found. Please see [issue #136](https://github.com/LinusU/flutter_web_auth/issues/136) for more info.
