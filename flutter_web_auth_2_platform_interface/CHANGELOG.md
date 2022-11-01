@@ -1,3 +1,7 @@
+## 2.0.1
+
+- 🌹 Added `redirectOriginOverride` for web implementations (By [Rexios80](https://github.com/Rexios80))
+
 ## 2.0.0
 
 - 💥 Full two-package federated plugin refactor

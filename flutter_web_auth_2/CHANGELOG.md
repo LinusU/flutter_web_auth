@@ -1,3 +1,13 @@
+## 2.0.1
+
+- 🌹 Merge upstream changes (most notably troubleshooting documentation)
+- 🌹 Added `redirectOriginOverride` for web implementations (By [Rexios80](https://github.com/Rexios80))
+- 🌹 Fix some documentation and changelogs
+
+## 2.0.0
+
+- 💥 Full two-package federated plugin refactor
+
 ## 1.1.2
 
 - 🌹 Support `win32` versions `2.7.0` until `3.x`
@@ -15,10 +25,6 @@
 - 🌹 Update `win32` to `3.0.0` (relevant only for Windows users)
 - 🌹 Add `android:exported` tag to documentation *before* users start to complain
 - 🌹 Overhauled example layout
-
-## 2.0.0
-
-- 💥 Full two-package federated plugin refactor
 
 ## 1.0.1
 

@@ -70,6 +70,8 @@ final response = await http.post('https://www.googleapis.com/oauth2/v4/token', b
 final accessToken = jsonDecode(response.body)['access_token'] as String;
 ```
 
+**Note:** To use multiple scopes with Google, you need to encode them as a single string, separated by spaces. For example, `scope: 'email https://www.googleapis.com/auth/userinfo.profile'`. Here is [a list of all supported scopes](https://developers.google.com/identity/protocols/oauth2/scopes).
+
 ## Upgrading from `flutter_web_auth`
 
 If you used `flutter_web_auth` correctly (and without extra hackage) before, it should be sufficient to replace the following strings *everywhere* (yes, also in `AndroidManifest.xml` for example):
@@ -130,3 +132,139 @@ For the Sign in with Apple in web_message response mode, postMessage from https:
 There is still a limitation that the callback URL scheme must start with `http://localhost:{port}`.
 
 If you have any experience in removing that limitation, please let me know!
+
+## Troubleshooting
+
+When you use this package for the first time, there are some problems you may have. These are some of the common solutions
+
+### Troubleshooting `callbackUrlScheme`
+
+- `callbackUrlScheme` must be a valid schema string or else this wont work.
+- A valid RFC 3986 URL scheme must consist of "a letter and followed by any combination of letters, digits, plus ("+"), period ("."), or hyphen ("-")."
+- scheme = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+- This means you can not use underscore "_", space " " or uppercase "ABCDEF...". You can not also start with a number. See [RFC3986#page-17](https://www.rfc-editor.org/rfc/rfc3986#page-17)
+- examples of VALID  `callbackUrlScheme` are `callback-scheme`, `another.scheme`, `examplescheme`
+- examples of INVALID  `callbackUrlScheme` are `callback_scheme`,`1another.scheme`, `exampleScheme`
+
+### Troubleshooting Flutter App
+
+- You have to tell the `FlutterWebAuth2.authenticate` function what your `callbackUrlScheme` is.
+- Example if your `callbackUrlScheme` is  `valid-callback-scheme`, your dart code will look like
+
+    ```dart
+    import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
+
+    // Present the dialog to the user
+    final result = await FlutterWebAuth2.authenticate(url: "https://my-custom-app.com/connect", callbackUrlScheme: "valid-callback-scheme");
+    ```
+
+### Troubleshooting Android
+
+- You are required to update your `AndroidManifest.xml` to include the `com.linusu.flutter_web_auth_2.CallbackActivity` activity something like
+
+    ```xml
+    <manifest>
+      <application>
+
+        <!-- add the com.linusu.flutter_web_auth_2.CallbackActivity activity -->
+        <activity
+          android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
+          android:exported="true">
+          <intent-filter android:label="flutter_web_auth_2">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="YOUR_CALLBACK_URL_SCHEME_HERE" />
+          </intent-filter>
+        </activity>
+
+      </application>
+    </manifest>
+    ```
+
+- Example of valid `AndroidManifest.xml` with VALID `callbackUrlScheme`. in the example below `valid-callback-scheme` is our `callbackUrlScheme`
+
+    ```xml
+    <manifest>
+      <application>
+        <activity
+          android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
+          android:exported="true">
+          <intent-filter android:label="flutter_web_auth_2">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="valid-callback-scheme" />
+          </intent-filter>
+        </activity>
+
+      </application>
+    </manifest>
+    ```
+
+- If you are targeting S+ (version 31 and above) you need to provide an explicit value for `android:exported`. If you followed earlier installation instructions this was not included. Make sure that you add `android:exported="true"` to the `com.linusu.flutter_web_auth.CallbackActivity` activity in your `AndroidManifest.xml` file.
+
+    ```diff
+    - <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity">
+    + <activity
+    +   android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
+    +   android:exported="true">
+    ```
+
+### Troubleshooting OAuth redirects
+
+- Your OAuth Provider must redirect to the valid  `callbackUrlScheme` + `://`. This mean if your  `callbackUrlScheme` is `validscheme`, your OAuth Provider must redirect to `validscheme://`
+- Example with `php`
+    ```php
+    <?php
+
+    header("Location: validscheme://?data1=value1&data2=value2");
+    ```
+
+### Troubleshooting HTML redirects
+
+- If you are using HTML hyperlinks, it must be a valid `callbackUrlScheme` + `://`. This mean if your `callbackUrlScheme` is `customappname`, your html hyperlink should be `customappname://`
+- example with `HTML`
+
+    ```html
+    <a href="customappname://?data1=value1&data2=value2">Go Back to App</a>
+    ```
+
+### Troubleshooting passing data to app
+
+- You can pass data back to your app by adding GET query parameters. This means by adding name=value type of data after your `callbackUrlScheme` + `://` + `?`
+- example to pass `access-token` to your app a valid url for that could be
+
+    ```text
+    my-callback-schema://?access-token=jdu9292s
+    ```
+
+- You can pass multipe data by concatenating with `&`
+
+    ```text
+    my-callback-schema://?data1=value1&data2=value2
+    ```
+
+- example to pass `access-token` and `user_id` to your app a valid url for that could be
+
+    ```text
+    my-callback-schema://?access-token=jdu9292s&user_id=23
+    ```
+
+- You can get the data in your app by using `Uri.parse(result).queryParameters`
+
+    ```dart
+    // Present the dialog to the user
+    final result = await FlutterWebAuth2.authenticate(url: "https://my-custom-app.com/connect", callbackUrlScheme: "valid-callback-scheme");
+    // Extract token from resulting url
+    String accessToken = Uri.parse(result).queryParameters['access-token'];
+    String userId = Uri.parse(result).queryParameters['user_id'];
+    ```
+
+### Cannot open keyboard on iOS
+
+This seems to be a bug in `ASWebAuthenticationSession`, and no work around have been found. Please see issue [#120](https://github.com/LinusU/flutter_web_auth/issues/120) for more info.
+
+### Error on macOS if Chrome is default browser
+
+This seems to be a bug in `ASWebAuthenticationSession`, and no work around have been found. Please see issue [#136](https://github.com/LinusU/flutter_web_auth/issues/136) for more info.
