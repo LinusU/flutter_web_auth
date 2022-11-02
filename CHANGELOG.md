@@ -1,3 +1,7 @@
+## 0.4.3
+
+- 🐛 Revert accidental breaking change (#142)
+
 ## 0.4.2
 
 - 🎉 Add `preferEphemeral` support on macOS

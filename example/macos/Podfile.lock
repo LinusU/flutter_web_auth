@@ -1,5 +1,5 @@
 PODS:
-  - flutter_web_auth (0.4.2):
+  - flutter_web_auth (0.4.3):
     - FlutterMacOS
   - FlutterMacOS (3.0.0)
 
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/flutter_web_auth/macos
 
 SPEC CHECKSUMS:
-  flutter_web_auth: 9f5a8310472792cef77f8f2227f39064be5d71ab
+  flutter_web_auth: 544a4ba14cdd7cbe4001e41dffd43e1cdf2831c6
   FlutterMacOS: 45e508c87e018a84368607c1203b4a59629ac279
 
 PODFILE CHECKSUM: 882fce9150893cd66c23bbd28a572b3439b8ac6d
