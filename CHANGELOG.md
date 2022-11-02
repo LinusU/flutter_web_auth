@@ -1,3 +1,11 @@
+## 0.5.0
+
+- 💥 Upgrade to Flutter version 3
+
+  Migration guide:
+
+  This release drops support for Flutter v2, and adds support for Flutter v3. Make sure to upgrade to Flutter v3 when upgrading to this version.
+
 ## 0.4.3
 
 - 🐛 Revert accidental breaking change (#142)
