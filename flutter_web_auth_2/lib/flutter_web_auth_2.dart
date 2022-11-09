@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -31,6 +32,17 @@ class FlutterWebAuth2 {
   static final _OnAppLifecycleResumeObserver _resumedObserver =
       _OnAppLifecycleResumeObserver(_cleanUpDanglingCalls);
 
+  static void _assertCallbackScheme(String callbackUrlScheme) {
+    if (!_schemeRegExp.hasMatch(callbackUrlScheme) &&
+        (kIsWeb || !Platform.isWindows)) {
+      throw ArgumentError.value(
+        callbackUrlScheme,
+        'callbackUrlScheme',
+        'must be a valid URL scheme',
+      );
+    }
+  }
+
   /// Ask the user to authenticate to the specified web service.
   ///
   /// The page pointed to by [url] will be loaded and displayed to the user.
@@ -59,13 +71,7 @@ class FlutterWebAuth2 {
       'Do not use redirectOriginOverride in production',
     );
 
-    if (!_schemeRegExp.hasMatch(callbackUrlScheme)) {
-      throw ArgumentError.value(
-        callbackUrlScheme,
-        'callbackUrlScheme',
-        'must be a valid URL scheme',
-      );
-    }
+    _assertCallbackScheme(callbackUrlScheme);
 
     WidgetsBinding.instance.removeObserver(
       _resumedObserver,

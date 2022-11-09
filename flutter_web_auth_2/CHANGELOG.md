@@ -1,3 +1,7 @@
+ ## 2.0.2
+
+- 🐛 Fix windows callback verification ([#22](https://github.com/ThexXTURBOXx/flutter_web_auth_2/issues/22))
+
 ## 2.0.1
 
 - 🌹 Merge upstream changes (most notably troubleshooting documentation)
