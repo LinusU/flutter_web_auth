@@ -54,20 +54,33 @@ public class SwiftFlutterWebAuthPlugin: NSObject, FlutterPlugin {
                 let session = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
 
                 if #available(iOS 13, *) {
-                    guard var topController = UIApplication.shared.keyWindow?.rootViewController else {
-                        result(FlutterError.aquireRootViewControllerFailed)
+                    var rootViewController: UIViewController? = nil
+
+                    // FlutterViewController
+                    if (rootViewController == nil) {
+                        rootViewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController
+                    }
+
+                    // UIViewController
+                    if (rootViewController == nil) {
+                        rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                    }
+
+                    // ACQUIRE_ROOT_VIEW_CONTROLLER_FAILED
+                    if (rootViewController == nil) {
+                        result(FlutterError.acquireRootViewControllerFailed)
                         return
                     }
 
-                    while let presentedViewController = topController.presentedViewController {
-                        topController = presentedViewController
+                    while let presentedViewController = rootViewController!.presentedViewController {
+                        rootViewController = presentedViewController
                     }
-                    if let nav = topController as? UINavigationController {
-                        topController = nav.visibleViewController ?? topController
+                    if let nav = rootViewController as? UINavigationController {
+                        rootViewController = nav.visibleViewController ?? rootViewController
                     }
 
-                    guard let contextProvider = topController as? ASWebAuthenticationPresentationContextProviding else {
-                        result(FlutterError.aquireRootViewControllerFailed)
+                    guard let contextProvider = rootViewController as? ASWebAuthenticationPresentationContextProviding else {
+                        result(FlutterError.acquireRootViewControllerFailed)
                         return
                     }
                     session.presentationContextProvider =  contextProvider
@@ -100,7 +113,7 @@ extension FlutterViewController: ASWebAuthenticationPresentationContextProviding
 }
 
 fileprivate extension FlutterError {
-    static var aquireRootViewControllerFailed: FlutterError {
-        return FlutterError(code: "AQUIRE_ROOT_VIEW_CONTROLLER_FAILED", message: "Failed to aquire root view controller" , details: nil)
+    static var acquireRootViewControllerFailed: FlutterError {
+        return FlutterError(code: "ACQUIRE_ROOT_VIEW_CONTROLLER_FAILED", message: "Failed to acquire root view controller" , details: nil)
     }
 }
