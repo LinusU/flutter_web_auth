@@ -1,3 +1,8 @@
+## 2.0.3
+
+- 🌹 Add Universal link support ([#26](https://github.com/ThexXTURBOXx/flutter_web_auth_2/pull/26))
+- 🌹 Some small documentation changes
+
 ## 2.0.2
 
 - 🐛 Fix windows callback verification ([#22](https://github.com/ThexXTURBOXx/flutter_web_auth_2/issues/22))
