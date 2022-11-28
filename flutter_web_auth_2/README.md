@@ -78,7 +78,7 @@ If you used `flutter_web_auth` correctly (and without extra hackage) before, it 
 - `FlutterWebAuth` -> `FlutterWebAuth2`
 - `flutter_web_auth` -> `flutter_web_auth_2`
 
-If you are still unsure or something is not working as well as before, please [open a new issue]().
+If you are still unsure or something is not working as well as before, please [open a new issue](https://github.com/ThexXTURBOXx/flutter_web_auth_2/issues/new/choose).
 
 ## Setup
 
