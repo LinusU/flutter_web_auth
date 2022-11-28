@@ -32,6 +32,18 @@ final result = await FlutterWebAuth2.authenticate(url: "https://my-custom-app.co
 final token = Uri.parse(result).queryParameters['token'];
 ```
 
+To authenticate using [Universal Links](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html) on iOS:
+
+```dart
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
+
+// Present the dialog to the user
+final result = await FlutterWebAuth2.authenticate(url: "https://my-custom-app.com/connect", callbackUrlScheme: "https");
+
+// Extract token from resulting url
+final token = Uri.parse(result).queryParameters['token'];
+```
+
 To authenticate the user using Google's OAuth2:
 
 ```dart
