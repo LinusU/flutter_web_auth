@@ -31,7 +31,9 @@ class FlutterWebAuth {
   ///
   /// [callbackUrlScheme] should be a string specifying the scheme of the url that the page will redirect to upon successful authentication.
   /// [preferEphemeral] if this is specified as `true`, an ephemeral web browser session will be used where possible (`FLAG_ACTIVITY_NO_HISTORY` on Android, `prefersEphemeralWebBrowserSession` on iOS/macOS)
-  static Future<String> authenticate({required String url, required String callbackUrlScheme, bool? preferEphemeral}) async {
+  ///
+  /// [debug] flag - used for avoid comparing Url.base.origin and messageEvent.origin that gives us opportunity to test without deploy (ex. deployed back example.com and local flutter app localhost)
+  static Future<String> authenticate({required String url, required String callbackUrlScheme, bool? preferEphemeral, bool? debug}) async {
     if (!_schemeRegExp.hasMatch(callbackUrlScheme)) {
       throw ArgumentError.value(callbackUrlScheme, 'callbackUrlScheme', 'must be a valid URL scheme');
     }
@@ -40,6 +42,7 @@ class FlutterWebAuth {
     WidgetsBinding.instance.addObserver(_resumedObserver);
     return await _channel.invokeMethod('authenticate', <String, dynamic>{
       'url': url,
+      'debug': debug ?? false,
       'callbackUrlScheme': callbackUrlScheme,
       'preferEphemeral': preferEphemeral ?? false,
     }) as String;
