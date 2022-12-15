@@ -56,8 +56,11 @@ final result = await FlutterWebAuth.authenticate(url: url.toString(), callbackUr
 // Extract code from resulting url
 final code = Uri.parse(result).queryParameters['code'];
 
+// Construct an Uri to Google's oauth2 endpoint
+final url = Uri.https('www.googleapis.com', 'oauth2/v4/token');
+
 // Use this code to get an access token
-final response = await http.post('https://www.googleapis.com/oauth2/v4/token', body: {
+final response = await http.post(url, body: {
   'client_id': googleClientId,
   'redirect_uri': '$callbackUrlScheme:/',
   'grant_type': 'authorization_code',
