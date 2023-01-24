@@ -1,3 +1,9 @@
+## 2.0.4
+
+- 🐛 Partially fix ([#135](https://github.com/LinusU/flutter_web_auth/issues/135))
+- 🌹 Support `win32` versions `2.7.0` until `4.x`
+- 🌹 Fix typos in README
+
 ## 2.0.3
 
 - 🌹 Add Universal link support ([#26](https://github.com/ThexXTURBOXx/flutter_web_auth_2/pull/26))
