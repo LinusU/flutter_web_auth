@@ -29,3 +29,7 @@ If applicable, add screenshots to help explain your problem.
 
 ## Additional context
 Add any other context about the problem here.
+
+## Checklist
+ - [ ] I have read and followed the **entire** [troubleshooting guide](https://github.com/ThexXTURBOXx/flutter_web_auth_2#troubleshooting) and it has not provided the solution I need.
+ - [ ] I have provided all the information I can (incl. auth URL etc.)
