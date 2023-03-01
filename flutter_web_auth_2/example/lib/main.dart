@@ -92,7 +92,7 @@ class MyAppState extends State<MyApp> {
 
       // Windows needs some callback URL on localhost
       req.response.write(
-        Platform.isWindows
+        (Platform.isWindows || Platform.isLinux)
             ? html.replaceFirst(
                 'CALLBACK_URL_HERE',
                 'http://localhost:43824/success?code=1337',
@@ -110,8 +110,9 @@ class MyAppState extends State<MyApp> {
   Future<void> authenticate() async {
     const url = 'http://127.0.0.1:43823/';
     // Windows needs some callback URL on localhost
-    final callbackUrlScheme =
-        Platform.isWindows ? 'http://localhost:43824' : 'foobar';
+    final callbackUrlScheme = (Platform.isWindows || Platform.isLinux)
+        ? 'http://localhost:43824'
+        : 'foobar';
 
     try {
       final result = await FlutterWebAuth2.authenticate(

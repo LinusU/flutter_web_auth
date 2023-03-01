@@ -40,3 +40,6 @@ flutter:
       windows:
         dartPluginClass: FlutterWebAuth2WindowsPlugin
         pluginClass: none
+      linux:
+        dartPluginClass: FlutterWebAuth2LinuxPlugin
+        pluginClass: none

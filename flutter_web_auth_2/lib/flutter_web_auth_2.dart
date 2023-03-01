@@ -7,8 +7,10 @@ import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platfor
 
 export 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 
+export 'src/flutter_web_auth_2_linux.dart' hide html;
 export 'src/flutter_web_auth_2_windows.dart'
     if (dart.library.html) 'src/flutter_web_auth_2_web.dart';
+
 
 class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
   final Function onResumed;
@@ -34,7 +36,7 @@ class FlutterWebAuth2 {
 
   static void _assertCallbackScheme(String callbackUrlScheme) {
     if (!_schemeRegExp.hasMatch(callbackUrlScheme) &&
-        (kIsWeb || !Platform.isWindows)) {
+        (kIsWeb || (!Platform.isWindows && !Platform.isLinux))) {
       throw ArgumentError.value(
         callbackUrlScheme,
         'callbackUrlScheme',
