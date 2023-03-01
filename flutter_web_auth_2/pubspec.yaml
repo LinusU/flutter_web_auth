@@ -18,6 +18,7 @@ dependencies:
     sdk: flutter
   url_launcher: ^6.1.6
   win32: ">=2.7.0 <5.0.0"
+  window_to_front: ^0.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.1

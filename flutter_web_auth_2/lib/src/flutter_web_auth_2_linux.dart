@@ -6,7 +6,7 @@ import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:win32/win32.dart';
+import 'package:window_to_front/window_to_front.dart';
 
 /// HTML code that generates a nice callback page.
 const html = '''
@@ -109,29 +109,6 @@ class FlutterWebAuth2LinuxPlugin extends FlutterWebAuth2Platform {
   }
 
   void _bringWindowToFront() {
-    // https://stackoverflow.com/questions/916259/win32-bring-a-window-to-top/34414846#34414846
-
-    /*final lWindowName = 'FLUTTER_RUNNER_WIN32_WINDOW'.toNativeUtf16();
-    final mHWnd = FindWindow(lWindowName, nullptr);
-    free(lWindowName);
-
-    final hCurWnd = GetForegroundWindow();
-    final dwMyID = GetCurrentThreadId();
-    final dwCurID = GetWindowThreadProcessId(hCurWnd, nullptr);
-    AttachThreadInput(dwCurID, dwMyID, TRUE);
-    SetWindowPos(mHWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
-    SetWindowPos(
-      mHWnd,
-      HWND_NOTOPMOST,
-      0,
-      0,
-      0,
-      0,
-      SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE,
-    );
-    SetForegroundWindow(mHWnd);
-    SetFocus(mHWnd);
-    SetActiveWindow(mHWnd);
-    AttachThreadInput(dwCurID, dwMyID, FALSE);*/
+    WindowToFront.activate();
   }
 }
