@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth_2_platform_interface/flutter_web_auth_2_platform_interface.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -97,7 +95,7 @@ class FlutterWebAuth2LinuxPlugin extends FlutterWebAuth2Platform {
     _authTimeout?.cancel();
 
     if (result != null) {
-      _bringWindowToFront();
+      await WindowToFront.activate();
       return result!;
     }
     throw PlatformException(message: 'User canceled login', code: 'CANCELED');
@@ -106,9 +104,5 @@ class FlutterWebAuth2LinuxPlugin extends FlutterWebAuth2Platform {
   @override
   Future clearAllDanglingCalls() async {
     await _server?.close(force: true);
-  }
-
-  void _bringWindowToFront() {
-    WindowToFront.activate();
   }
 }
