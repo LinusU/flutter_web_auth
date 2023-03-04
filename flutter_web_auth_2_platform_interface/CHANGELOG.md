@@ -1,3 +1,7 @@
+## 2.1.0
+
+- 🌹 Update linter rules
+
 ## 2.0.1
 
 - 🌹 Added `redirectOriginOverride` for web implementations (By [Rexios80](https://github.com/Rexios80))

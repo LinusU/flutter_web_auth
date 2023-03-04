@@ -1,3 +1,10 @@
+## 2.1.0
+
+- 🎉 Add support for Linux ([#31](https://github.com/ThexXTURBOXx/flutter_web_auth_2/pull/31))
+- 🌹 Get rid of dependency on `win32` and `ffi` by using `window_to_front` instead
+- 🌹 Update linter rules
+- 🌹 Update Android dependencies
+
 ## 2.0.4
 
 - 🐛 Partially fix ([#135](https://github.com/LinusU/flutter_web_auth/issues/135))
