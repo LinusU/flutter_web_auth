@@ -10,14 +10,12 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
-  ffi: ^2.0.1
   flutter:
     sdk: flutter
   flutter_web_auth_2_platform_interface: ^2.0.1
   flutter_web_plugins:
     sdk: flutter
   url_launcher: ^6.1.6
-  win32: ">=2.7.0 <5.0.0"
   window_to_front: ^0.0.3
 
 dev_dependencies:
