@@ -11,7 +11,6 @@ export 'src/flutter_web_auth_2_linux.dart' hide html;
 export 'src/flutter_web_auth_2_windows.dart'
     if (dart.library.html) 'src/flutter_web_auth_2_web.dart';
 
-
 class _OnAppLifecycleResumeObserver extends WidgetsBindingObserver {
   final Function onResumed;
 

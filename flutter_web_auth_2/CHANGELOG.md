@@ -1,3 +1,7 @@
+## 2.1.1
+
+- 🌹 Fix formatting
+
 ## 2.1.0
 
 - 🎉 Add support for Linux ([#31](https://github.com/ThexXTURBOXx/flutter_web_auth_2/pull/31))
