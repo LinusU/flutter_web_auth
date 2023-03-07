@@ -1,15 +1,12 @@
 # Web Auth 2 for Flutter
 
-**This project is a continuation of [flutter_web_auth](https://github.com/LinusU/flutter_web_auth) by Linus Unnebäck.**
+**This project is a continuation of [flutter_web_auth](https://github.com/LinusU/flutter_web_auth) by Linus Unnebäck with many new features and bug fixes.**
 
 A Flutter plugin for authenticating a user with a web service, even if the web service is run by a third party. Most commonly used with OAuth2, but can be used with any web flow that can redirect to a custom scheme.
 
-In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenticationSession] on iOS 12+ and macOS 10.15+, [`SFAuthenticationSession`][SFAuthenticationSession] on iOS 11, [Chrome Custom Tabs][Chrome Custom Tabs] on Android and opens a new window on Web. You can build it with iOS 8+, but it is currently only supported by iOS 11 or higher.
+In the background, this plugin uses [`ASWebAuthenticationSession`](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession) on iOS 12+ and macOS 10.15+, [`SFAuthenticationSession`](https://developer.apple.com/documentation/safariservices/sfauthenticationsession) on iOS 11, [Chrome Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs/) on Android and opens a new window on Web. You can build it with iOS 8+, but it is currently only supported by iOS 11 or higher.
 
-[ASWebAuthenticationSession]: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession
-[SFAuthenticationSession]: https://developer.apple.com/documentation/safariservices/sfauthenticationsession
-[Chrome Custom Tabs]: https://developer.chrome.com/docs/android/custom-tabs/
-
+<!-- TODO: Replace with a nicer GIF
 | **iOS**                | **Android**                    |
 | ---------------------- | ------------------------------ |
 | ![iOS](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-ios.gif) | ![Android](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-android.gif) |
@@ -17,8 +14,16 @@ In the background, this plugin uses [`ASWebAuthenticationSession`][ASWebAuthenti
 | **macOS**                  |
 | -------------------------- |
 | ![macOS](https://raw.githubusercontent.com/ThexXTURBOXx/flutter_web_auth_2/master/flutter_web_auth_2/screen-macos.gif) |
+-->
 
 ## Usage
+
+Add the following snippet to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flutter_web_auth_2: ^2.0.0
+```
 
 To authenticate against your own custom site:
 
@@ -141,7 +146,7 @@ The redirect URL passed to the authentication service must be the same as the UR
 
 For the Sign in with Apple in web_message response mode, postMessage from https://appleid.apple.com is also captured, and the authorization object is returned as a URL fragment encoded as a query string (for compatibility with other providers).
 
-### Windows
+### Windows and Linux
 
 There is still a limitation that the callback URL scheme must start with `http://localhost:{port}`.
 
@@ -153,10 +158,10 @@ When you use this package for the first time, you may experience some problems. 
 
 ### Troubleshooting `callbackUrlScheme`
 
-- `callbackUrlScheme` must be a valid schema string or else this wont work.
-- A valid RFC 3986 URL scheme must consist of "a letter and followed by any combination of letters, digits, plus ("+"), period ("."), or hyphen ("-")."
-- scheme = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-- This means you can not use underscore "_", space " " or uppercase "ABCDEF...". It must also not start with a number. See [RFC3986#page-17](https://www.rfc-editor.org/rfc/rfc3986#page-17)
+- `callbackUrlScheme` must be a valid schema string or else this library won't work
+- A valid RFC 3986 URL scheme must consist of "a letter and followed by any combination of letters, digits, plus "`+`", period "`.`", or hyphen "`-`"
+- scheme = `ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )`
+- This means you can not use underscore "`_`", space "` `" or uppercase "`ABCDEF...`". It must also not start with a number. See [RFC3986#page-17](https://www.rfc-editor.org/rfc/rfc3986#page-17)
 - Examples of VALID `callbackUrlScheme`s are `callback-scheme`, `another.scheme`, `examplescheme`
 - Examples of INVALID `callbackUrlScheme`s are `callback_scheme`,`1another.scheme`, `exampleScheme`
 
