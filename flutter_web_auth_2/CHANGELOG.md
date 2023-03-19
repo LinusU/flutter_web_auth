@@ -1,3 +1,7 @@
+## 2.1.2
+
+- 🐛 Downgrade Kotlin to fix some compatibility issues
+
 ## 2.1.1
 
 - 🌹 Fix formatting
