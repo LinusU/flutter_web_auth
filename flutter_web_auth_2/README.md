@@ -18,7 +18,7 @@ In the background, this plugin uses [`ASWebAuthenticationSession`](https://devel
 
 ## Usage
 
-Add the following snippet to your `pubspec.yaml`:
+Add the following snippet to your `pubspec.yaml` and follow the [Setup guide](#setup):
 
 ```yaml
 dependencies:
