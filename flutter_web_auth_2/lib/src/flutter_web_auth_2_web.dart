@@ -45,8 +45,9 @@ class FlutterWebAuth2WebPlugin extends FlutterWebAuth2Platform {
     required String callbackUrlScheme,
     required bool preferEphemeral,
     String? redirectOriginOverride,
+    List contextArgs = const [],
   }) async {
-    context.callMethod('open', [url]);
+    context.callMethod('open', <dynamic>[url] + contextArgs);
     await for (final MessageEvent messageEvent in window.onMessage) {
       if (messageEvent.origin == (redirectOriginOverride ?? Uri.base.origin)) {
         final flutterWebAuthMessage = messageEvent.data['flutter-web-auth-2'];

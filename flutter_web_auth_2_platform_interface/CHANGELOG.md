@@ -1,3 +1,7 @@
+## 2.1.3
+
+- 🌹 Add `contextArgs` for web implementations (See [#40](https://github.com/ThexXTURBOXx/flutter_web_auth_2/issues/40))
+
 ## 2.1.0
 
 - 🌹 Update linter rules

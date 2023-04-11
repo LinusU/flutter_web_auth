@@ -133,7 +133,7 @@ On the web platform, an endpoint must be created that captures the callback URL 
 ```html
 <!DOCTYPE html>
 <title>Authentication complete</title>
-<p>Authentication is complete. If this does not happen automatically, please close the window.
+<p>Authentication is complete. If this does not happen automatically, please close the window.</p>
 <script>
   window.opener.postMessage({
     'flutter-web-auth-2': window.location.href
@@ -145,6 +145,8 @@ On the web platform, an endpoint must be created that captures the callback URL 
 The redirect URL passed to the authentication service must be the same as the URL the application is running on (schema, host, port if necessary) and the path must point to the generated HTML file, in this case `/auth.html`. The `callbackUrlScheme` parameter of the `authenticate()` method does not take this into account, so it is possible to use a schema for native platforms in the code.
 
 For the Sign in with Apple in web_message response mode, postMessage from https://appleid.apple.com is also captured, and the authorization object is returned as a URL fragment encoded as a query string (for compatibility with other providers).
+
+If you want to pass additional parameters to the URL open call, you can do so in the `authenticate` function using the parameter `contextArgs`.
 
 ### Windows and Linux
 
