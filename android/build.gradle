@@ -25,6 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.linusu.flutter_web_auth'
     compileSdkVersion 31
 
     sourceSets {
