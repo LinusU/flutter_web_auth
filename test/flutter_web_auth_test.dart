@@ -11,7 +11,8 @@ void main() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       expect(methodCall.method, 'authenticate');
 
-      expect(methodCall.arguments['url'] as String, 'https://example.com/login');
+      expect(
+          methodCall.arguments['url'] as String, 'https://example.com/login');
       expect(methodCall.arguments['callbackUrlScheme'] as String, 'foobar');
 
       return 'https://example.com/success';
@@ -24,14 +25,16 @@ void main() {
 
   test('authenticate', () async {
     expect(
-      await FlutterWebAuth.authenticate(url: 'https://example.com/login', callbackUrlScheme: 'foobar'),
+      await FlutterWebAuth.authenticate(
+          url: 'https://example.com/login', callbackUrlScheme: 'foobar'),
       'https://example.com/success',
     );
   });
 
   test('invalid scheme', () async {
     await expectLater(
-      FlutterWebAuth.authenticate(url: 'https://example.com/login', callbackUrlScheme: 'foobar://test'),
+      FlutterWebAuth.authenticate(
+          url: 'https://example.com/login', callbackUrlScheme: 'foobar://test'),
       throwsA(isA<ArgumentError>()),
     );
   });
