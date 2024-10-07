@@ -1,3 +1,11 @@
+## 0.6.0
+
+- 💥 Upgrade to Flutter version 3.23
+
+  Migration guide:
+
+  The source have been updated to work with the latest version of Flutter, including upgrading from Gradle v7 to v8. Make sure that you are on the latest version on Flutter before upgrading to this version.
+
 ## 0.5.0
 
 - 💥 Upgrade to Flutter version 3

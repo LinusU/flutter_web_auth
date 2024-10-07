@@ -1,5 +1,5 @@
 PODS:
-  - flutter_web_auth (0.5.0):
+  - flutter_web_auth (0.6.0):
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
 
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
 
 SPEC CHECKSUMS:
-  flutter_web_auth: f129850adcc025e7136109a53a00aac93ec62076
+  flutter_web_auth: 1966f190ad0051456e12d9f2db506a4df81e7434
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
 
 PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
