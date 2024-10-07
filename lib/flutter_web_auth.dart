@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show MethodChannel;

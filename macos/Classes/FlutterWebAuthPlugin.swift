@@ -45,6 +45,9 @@ public class FlutterWebAuthPlugin: NSObject, FlutterPlugin {
 
             session.start()
             keepMe = session
+        } else if (call.method == "cleanUpDanglingCalls") {
+            // we do not keep track of old callbacks on macOS, so nothing to do here
+            result(nil)
         } else {
             result(FlutterMethodNotImplemented)
         }

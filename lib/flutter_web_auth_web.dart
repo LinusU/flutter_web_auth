@@ -1,3 +1,5 @@
+// ignore: avoid_web_libraries_in_flutter
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
@@ -6,11 +8,11 @@ import 'dart:js';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-class FlutterWebAuthPlugin {
+class FlutterWebAuthWeb {
   static void registerWith(Registrar registrar) {
     final MethodChannel channel = MethodChannel(
         'flutter_web_auth', const StandardMethodCodec(), registrar.messenger);
-    final FlutterWebAuthPlugin instance = FlutterWebAuthPlugin();
+    final FlutterWebAuthWeb instance = FlutterWebAuthWeb();
     channel.setMethodCallHandler(instance.handleMethodCall);
   }
 
