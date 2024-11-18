@@ -21,6 +21,9 @@ class FlutterWebAuthWeb {
       case 'authenticate':
         final String url = call.arguments['url'];
         return _authenticate(url);
+      case 'cleanUpDanglingCalls':
+        // No-op
+        break;
       default:
         throw PlatformException(
             code: 'Unimplemented',
